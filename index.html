@@ -1,854 +1,869 @@
 <!DOCTYPE html>
-<html lang="el" class="dark">
+<html lang="el">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoJo's Bizarre Adventure - Manga Collector</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JoJo Manga Collector</title>
+  
+  <!-- PWA & Mobile Meta -->
+  <meta name="theme-color" content="#120e24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="JoJo Tracker">
+  <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/JoJo%27s_Bizarre_Adventure_logo.png/320px-JoJo%27s_Bizarre_Adventure_logo.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Over+the+Rainbow&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Mobile / PWA Meta Tags -->
-    <meta name="theme-color" content="#0f0f17">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="JoJo Manga">
-    <link rel="apple-touch-icon" href="https://placehold.co/192x192/6b21a8/ffffff?text=JJBA">
+  <style>
+    :root {
+      --bg-dark: #0b0813;
+      --card-bg: rgba(23, 17, 38, 0.85);
+      --card-border: rgba(147, 51, 234, 0.2);
+      
+      --jojo-purple: #9333ea;
+      --jojo-pink: #ec4899;
+      --jojo-gold: #eab308;
+      --jojo-cyan: #06b6d4;
+      --jojo-green: #22c55e;
+      --jojo-red: #ef4444;
+      
+      --part1-color: #3b82f6; /* Phantom Blood Blue */
+      --part2-color: #10b981; /* Battle Tendency Green */
+      --part3-color: #ef4444; /* Stardust Crusaders Red */
+      --part4-color: #a855f7; /* Diamond is Unbreakable Purple */
+      --part5-color: #eab308; /* Golden Wind Gold */
+      --part6-color: #ec4899; /* Stone Ocean Pink */
+      --part7-color: #f97316; /* Steel Ball Run Orange */
+      --part8-color: #14b8a6; /* JoJolion Teal */
+      --part9-color: #8b5cf6; /* The JOJOLands Violet */
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
 
-    <!-- Web App Manifest (Data URL for single-file deployment) -->
-    <link rel="manifest" href='data:application/manifest+json,{"name":"JoJo Manga Collector","short_name":"JoJo Manga","start_url":".","display":"standalone","background_color":"#0f0f17","theme_color":"#0f0f17","icons":[{"src":"https://placehold.co/192x192/6b21a8/ffffff?text=JJBA","sizes":"192x192","type":"image/png"},{"src":"https://placehold.co/512x512/6b21a8/ffffff?text=JJBA","sizes":"512x512","type":"image/png"}]}'>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        jojo: {
-                            purple: '#6b21a8',
-                            darkPurple: '#2e1065',
-                            gold: '#eab308',
-                            pink: '#ec4899',
-                            magenta: '#d946ef',
-                            dark: '#0f0f17',
-                            card: '#1a1a28',
-                            cardBorder: '#2e2e48'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f0f17;
-            color: #f3f4f6;
-        }
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 50px;
+    }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f0f17;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4c1d95;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6d28d9;
-        }
+    /* Header & Menus */
+    header {
+      background: rgba(11, 8, 19, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem;
+    }
 
-        /* Menacing Effect Effect Animation */
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.2), 0 0 30px rgba(217, 70, 239, 0.1); }
-            50% { box-shadow: 0 0 25px rgba(234, 179, 8, 0.4), 0 0 45px rgba(217, 70, 239, 0.25); }
-        }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .jojo-glow {
-            animation: pulseGlow 4s infinite ease-in-out;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #eab308, #ec4899, #9333ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+    }
 
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .logo i {
+      -webkit-text-fill-color: initial;
+      color: var(--jojo-pink);
+    }
 
-        .purple-pink-gradient {
-            background: linear-gradient(135deg, #7e22ce 0%, #d946ef 100%);
-        }
+    /* Action Buttons */
+    .btn {
+      background: rgba(147, 51, 234, 0.2);
+      border: 1px solid var(--jojo-purple);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        /* Status colors */
-        .status-owned {
-            border-color: #22c55e;
-            background-color: rgba(34, 197, 94, 0.08);
-        }
-        .status-wishlist {
-            border-color: #eab308;
-            background-color: rgba(234, 179, 8, 0.08);
-        }
-        .status-missing {
-            border-color: #374151;
-            background-color: rgba(31, 41, 55, 0.3);
-        }
-    </style>
+    .btn:hover {
+      background: var(--jojo-purple);
+      box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+    }
+
+    /* Stats Overview */
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--jojo-purple);
+    }
+
+    .stat-card.owned::before { background: var(--jojo-green); }
+    .stat-card.missing::before { background: var(--jojo-red); }
+    .stat-card.wishlist::before { background: var(--jojo-gold); }
+
+    .stat-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--jojo-purple), var(--jojo-pink));
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    /* Controls Bar */
+    .controls {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 15px 10px 40px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: var(--jojo-purple);
+      box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--jojo-purple);
+      color: white;
+      border-color: var(--jojo-purple);
+    }
+
+    /* Parts & Volumes Section */
+    .part-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .part-header {
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .part-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .part-badge {
+      width: 12px;
+      height: 25px;
+      border-radius: 3px;
+    }
+
+    .part-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .part-stats {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .volumes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      padding: 15px;
+    }
+
+    .volume-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+    }
+
+    .volume-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .volume-number {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .volume-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .volume-status-tag {
+      font-size: 0.7rem;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    /* Volume Status Styles */
+    .status-owned {
+      border: 1px solid var(--jojo-green) !important;
+      background: rgba(34, 197, 94, 0.1) !important;
+    }
+    .status-owned .volume-status-tag {
+      background: var(--jojo-green);
+      color: #000;
+    }
+
+    .status-wishlist {
+      border: 1px solid var(--jojo-gold) !important;
+      background: rgba(234, 179, 8, 0.1) !important;
+    }
+    .status-wishlist .volume-status-tag {
+      background: var(--jojo-gold);
+      color: #000;
+    }
+
+    .status-missing {
+      opacity: 0.6;
+    }
+    .status-missing .volume-status-tag {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+    }
+
+    /* Modal for Details */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #171126;
+      border: 1px solid var(--jojo-purple);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    .status-options {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .status-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .status-btn.active[data-status="owned"] { background: var(--jojo-green); color: #000; font-weight: 700; }
+    .status-btn.active[data-status="wishlist"] { background: var(--jojo-gold); color: #000; font-weight: 700; }
+    .status-btn.active[data-status="missing"] { background: var(--jojo-red); color: #fff; font-weight: 700; }
+
+    .notes-textarea {
+      width: 100%;
+      height: 80px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      color: #fff;
+      padding: 8px;
+      font-family: inherit;
+      resize: none;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 40px;
+    }
+  </style>
 </head>
-<body class="min-h-screen pb-12 text-gray-100 flex flex-col">
+<body>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 bg-jojo-dark/90 backdrop-blur-md border-b border-jojo-cardBorder shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <!-- Title & Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-xl purple-pink-gradient flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-purple-900/50 transform -rotate-3">
-                        JJBA
-                    </div>
-                    <div>
-                        <h1 class="text-xl sm:text-2xl font-black tracking-wider uppercase gold-gradient-text">
-                            JoJo Manga Collector
-                        </h1>
-                        <p class="text-xs text-gray-400 font-medium">Παρακολούθηση & Διαχείριση Συλλογής</p>
-                    </div>
-                </div>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-star"></i> JOJO MANGA TRACKER
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn" onclick="exportData()"><i class="fa-solid fa-download"></i></button>
+        <button class="btn" onclick="importData()"><i class="fa-solid fa-upload"></i></button>
+      </div>
+    </div>
+  </header>
 
-                <!-- Quick Actions & Reset -->
-                <div class="flex items-center gap-2 self-end md:self-auto">
-                    <button id="export-data-btn" onclick="exportData()" class="px-3 py-1.5 text-xs font-semibold bg-jojo-card hover:bg-gray-800 text-gray-300 rounded-lg border border-jojo-cardBorder transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-download"></i> Εξαγωγή
-                    </button>
-                    <label id="import-data-label" class="px-3 py-1.5 text-xs font-semibold bg-jojo-card hover:bg-gray-800 text-gray-300 rounded-lg border border-jojo-cardBorder transition cursor-pointer flex items-center gap-1.5">
-                        <i class="fa-solid fa-upload"></i> Εισαγωγή
-                        <input type="file" id="import-file" accept=".json" class="hidden" onchange="importData(event)">
-                    </label>
-                    <button onclick="resetDataConfirmation()" class="px-3 py-1.5 text-xs font-semibold bg-red-950/40 hover:bg-red-900/60 text-red-300 rounded-lg border border-red-900/50 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-trash-can"></i> Επαναφορά
-                    </button>
-                </div>
-            </div>
+  <div class="container">
+    <!-- Overall Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-title">Συνολική Πρόοδος</div>
+        <div class="stat-value">
+          <span id="total-percent">0%</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="total-count-text">0 / 0 Τόμοι</span>
         </div>
-    </header>
-
-    <!-- Main Content Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full space-y-6">
-
-        <!-- DASHBOARD / STATS SECTION -->
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <!-- Overall Progress Card -->
-            <div class="md:col-span-2 bg-jojo-card border border-jojo-cardBorder rounded-2xl p-5 jojo-glow relative overflow-hidden flex flex-col justify-between">
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <span class="text-xs uppercase font-bold tracking-widest text-jojo-gold">Συνολική Πρόοδος</span>
-                        <h2 class="text-2xl font-black text-white mt-1">Η Συλλογή μου</h2>
-                    </div>
-                    <div class="text-3xl font-black gold-gradient-text" id="overall-percentage">0%</div>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="space-y-2">
-                    <div class="w-full bg-gray-800 h-3.5 rounded-full overflow-hidden p-0.5 border border-gray-700">
-                        <div id="overall-progress-bar" class="h-full purple-pink-gradient rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-gray-400 font-medium pt-1">
-                        <span>Έχω: <strong id="total-owned-count" class="text-green-400">0</strong> τόμους</span>
-                        <span>Σύνολο: <strong id="total-volumes-count" class="text-gray-200">0</strong> τόμοι</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stats Counter Mini-cards -->
-            <div class="bg-jojo-card border border-jojo-cardBorder rounded-2xl p-4 flex flex-col justify-between">
-                <div class="flex items-center justify-between text-gray-400">
-                    <span class="text-xs font-bold uppercase tracking-wider">Στην Κατοχή</span>
-                    <i class="fa-solid fa-check-circle text-green-500 text-lg"></i>
-                </div>
-                <div class="my-2">
-                    <span class="text-3xl font-black text-green-400" id="stat-owned">0</span>
-                    <span class="text-xs text-gray-400 block mt-1">Τόμοι στη βιβλιοθήκη</span>
-                </div>
-                <div class="text-xs text-gray-500 border-t border-gray-800 pt-2" id="stat-owned-sub">0% του συνόλου</div>
-            </div>
-
-            <div class="bg-jojo-card border border-jojo-cardBorder rounded-2xl p-4 flex flex-col justify-between">
-                <div class="flex items-center justify-between text-gray-400">
-                    <span class="text-xs font-bold uppercase tracking-wider">Wishlist / Λείπουν</span>
-                    <i class="fa-solid fa-bookmark text-yellow-500 text-lg"></i>
-                </div>
-                <div class="my-2">
-                    <div class="flex items-baseline space-x-2">
-                        <span class="text-3xl font-black text-yellow-400" id="stat-wishlist">0</span>
-                        <span class="text-xs text-gray-400">θέλω</span>
-                        <span class="text-xl font-bold text-gray-500">/</span>
-                        <span class="text-xl font-bold text-red-400" id="stat-missing">0</span>
-                        <span class="text-xs text-gray-400">λείπουν</span>
-                    </div>
-                </div>
-                <div class="text-xs text-gray-500 border-t border-gray-800 pt-2" id="stat-needed-sub">0 τόμοι ακόμα για ολοκλήρωση</div>
-            </div>
-        </section>
-
-        <!-- FILTERS AND SEARCH TOOLBAR -->
-        <section class="bg-jojo-card border border-jojo-cardBorder rounded-2xl p-4 space-y-4">
-            <div class="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
-                
-                <!-- Search Input -->
-                <div class="relative flex-1">
-                    <i class="fa-solid fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="search-input" oninput="renderApp()" placeholder="Αναζήτηση με τίτλο, αριθμό τόμου ή Part..." class="w-full bg-jojo-dark border border-jojo-cardBorder rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
-                </div>
-
-                <!-- Status Filter Pills -->
-                <div class="flex items-center gap-1 bg-jojo-dark p-1 rounded-xl border border-jojo-cardBorder overflow-x-auto">
-                    <button onclick="setStatusFilter('ALL')" id="filter-status-ALL" class="filter-status-btn px-3 py-1.5 text-xs font-bold rounded-lg transition whitespace-nowrap bg-purple-600 text-white shadow">
-                        Όλα
-                    </button>
-                    <button onclick="setStatusFilter('OWNED')" id="filter-status-OWNED" class="filter-status-btn px-3 py-1.5 text-xs font-bold rounded-lg transition whitespace-nowrap text-gray-400 hover:text-white">
-                        <i class="fa-solid fa-check text-green-400 mr-1"></i> Έχω
-                    </button>
-                    <button onclick="setStatusFilter('WISHLIST')" id="filter-status-WISHLIST" class="filter-status-btn px-3 py-1.5 text-xs font-bold rounded-lg transition whitespace-nowrap text-gray-400 hover:text-white">
-                        <i class="fa-solid fa-star text-yellow-400 mr-1"></i> Επιθυμία
-                    </button>
-                    <button onclick="setStatusFilter('MISSING')" id="filter-status-MISSING" class="filter-status-btn px-3 py-1.5 text-xs font-bold rounded-lg transition whitespace-nowrap text-gray-400 hover:text-white">
-                        <i class="fa-solid fa-xmark text-red-400 mr-1"></i> Λείπουν
-                    </button>
-                </div>
-            </div>
-
-            <!-- Part Quick Navigation Chips -->
-            <div class="flex items-center gap-2 overflow-x-auto pt-2 pb-1 scrollbar-none border-t border-jojo-cardBorder/50" id="part-chips-container">
-                <!-- Dynamic Chips Generated via JS -->
-            </div>
-        </section>
-
-        <!-- MANGA PARTS & VOLUMES CONTAINER -->
-        <section id="manga-parts-container" class="space-y-8">
-            <!-- Dynamic Content render -->
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="mt-auto border-t border-jojo-cardBorder bg-jojo-dark py-6 text-center text-xs text-gray-500">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="font-medium">JoJo's Bizarre Adventure © Hirohiko Araki / Shueisha</p>
-            <p class="mt-1">Εφαρμογή Διαχείρισης Manga Συλλογής • 2026</p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="total-progress-bar"></div>
         </div>
-    </footer>
+      </div>
 
-    <!-- VOLUME EDIT DETAILS MODAL -->
-    <div id="notes-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-jojo-card border border-jojo-cardBorder rounded-2xl max-w-md w-full p-6 shadow-2xl relative space-y-4">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+      <div class="stat-card owned">
+        <div class="stat-title">Στην Κατοχή</div>
+        <div class="stat-value" id="owned-count" style="color: var(--jojo-green);">0</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Τόμοι στη βιβλιοθήκη</div>
+      </div>
 
-            <div class="border-b border-jojo-cardBorder pb-3">
-                <span id="modal-part-title" class="text-xs font-bold text-jojo-gold uppercase tracking-wider block">Part Name</span>
-                <h3 id="modal-volume-title" class="text-xl font-extrabold text-white">Τόμος #</h3>
-            </div>
-
-            <form id="modal-form" onsubmit="saveModalData(event)" class="space-y-4">
-                <input type="hidden" id="modal-volume-id">
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Κατάσταση</label>
-                    <select id="modal-status" class="w-full bg-jojo-dark border border-jojo-cardBorder rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500">
-                        <option value="MISSING">❌ Δεν το έχω (Missing)</option>
-                        <option value="OWNED">✅ Το έχω (Owned)</option>
-                        <option value="WISHLIST">⭐ Επιθυμία (Wishlist)</option>
-                    </select>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Έκδοση / Γλώσσα</label>
-                        <input type="text" id="modal-edition" placeholder="π.χ. English Hardcover" class="w-full bg-jojo-dark border border-jojo-cardBorder rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Τιμή (Aγοράς/Στόχος)</label>
-                        <input type="text" id="modal-price" placeholder="π.χ. 15€" class="w-full bg-jojo-dark border border-jojo-cardBorder rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">Σημειώσεις / Κατάσταση βιβλίου</label>
-                    <textarea id="modal-notes" rows="3" placeholder="π.χ. Αγορασμένο από Comet Edition, σε άριστη κατάσταση..." class="w-full bg-jojo-dark border border-jojo-cardBorder rounded-xl p-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500"></textarea>
-                </div>
-
-                <div class="flex gap-2 pt-2">
-                    <button type="button" onclick="closeModal()" class="flex-1 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-xs font-bold transition">
-                        Ακύρωση
-                    </button>
-                    <button type="submit" class="flex-1 py-2.5 purple-pink-gradient hover:opacity-90 text-white rounded-xl text-xs font-bold transition shadow-lg">
-                        Αποθήκευση
-                    </button>
-                </div>
-            </form>
+      <div class="stat-card wishlist">
+        <div class="stat-title">Wishlist / Λείπουν</div>
+        <div class="stat-value">
+          <span id="wishlist-count" style="color: var(--jojo-gold);">0</span>
+          <span style="font-size: 1rem; color: var(--text-muted);">/</span>
+          <span id="missing-count" style="color: var(--jojo-red);">0</span>
         </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Επιθυμία / Λείπουν</div>
+      </div>
     </div>
 
-    <!-- NOTIFICATION TOAST -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-purple-900 border border-purple-500 text-white px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 translate-y-5 pointer-events-none z-50 flex items-center space-x-2 text-sm font-semibold">
-        <i id="toast-icon" class="fa-solid fa-circle-check text-green-400"></i>
-        <span id="toast-message">Ενημερώθηκε!</span>
+    <!-- Controls -->
+    <div class="controls">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search-input" placeholder="Αναζήτηση τόμου ή Part..." oninput="renderApp()">
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all" onclick="setStatusFilter('all')">Όλα</button>
+        <button class="filter-btn" data-filter="owned" onclick="setStatusFilter('owned')"><i class="fa-solid fa-check"></i> Έχω</button>
+        <button class="filter-btn" data-filter="wishlist" onclick="setStatusFilter('wishlist')"><i class="fa-solid fa-star"></i> Επιθυμία</button>
+        <button class="filter-btn" data-filter="missing" onclick="setStatusFilter('missing')"><i class="fa-solid fa-xmark"></i> Λείπουν</button>
+      </div>
     </div>
 
-    <!-- APPLICATION LOGIC JS -->
-    <script>
-        // Official JoJo Parts & Volumes Data Structure
-        const JOJO_DATA = [
-            {
-                id: 1,
-                name: "Part 1: Phantom Blood",
-                greekName: "Φάντασμα του Αίματος (Hardcover JoJonium)",
-                years: "1987",
-                color: "from-blue-600 to-indigo-900",
-                badgeBg: "bg-blue-900/40 text-blue-300 border-blue-700/50",
-                volumes: [
-                    { id: "p1-v1", number: 1, title: "JoJonium Vol. 1 (Dio the Invader)" },
-                    { id: "p1-v2", number: 2, title: "JoJonium Vol. 2 (The Thirst for Blood)" },
-                    { id: "p1-v3", number: 3, title: "JoJonium Vol. 3 (The Final Ripple)" }
-                ]
-            },
-            {
-                id: 2,
-                name: "Part 2: Battle Tendency",
-                greekName: "Τάση για Μάχη (Hardcover JoJonium)",
-                years: "1987–1989",
-                color: "from-emerald-600 to-teal-900",
-                badgeBg: "bg-emerald-900/40 text-emerald-300 border-emerald-700/50",
-                volumes: [
-                    { id: "p2-v1", number: 1, title: "JoJonium Vol. 4 (JoJo in New York)" },
-                    { id: "p2-v2", number: 2, title: "JoJonium Vol. 5 (The Pillar Men)" },
-                    { id: "p2-v3", number: 3, title: "JoJonium Vol. 6 (The Red Stone of Aja)" },
-                    { id: "p2-v4", number: 4, title: "JoJonium Vol. 7 (The Hero of Ancient Times)" }
-                ]
-            },
-            {
-                id: 3,
-                name: "Part 3: Stardust Crusaders",
-                greekName: "Μαχητές της Αστρόσκανης (Hardcover JoJonium)",
-                years: "1989–1992",
-                color: "from-amber-600 to-red-900",
-                badgeBg: "bg-amber-900/40 text-amber-300 border-amber-700/50",
-                volumes: [
-                    { id: "p3-v1", number: 1, title: "JoJonium Vol. 8 (A Powerful Enemy)" },
-                    { id: "p3-v2", number: 2, title: "JoJonium Vol. 9 (The Curse of DIO)" },
-                    { id: "p3-v3", number: 3, title: "JoJonium Vol. 10 (The Ship of Fools)" },
-                    { id: "p3-v4", number: 4, title: "JoJonium Vol. 11 (The Battle on the Desert)" },
-                    { id: "p3-v5", number: 5, title: "JoJonium Vol. 12 (Fool's Errand)" },
-                    { id: "p3-v6", number: 6, title: "JoJonium Vol. 13 (High Priestess)" },
-                    { id: "p3-v7", number: 7, title: "JoJonium Vol. 14 (Geb's N'Doul)" },
-                    { id: "p3-v8", number: 8, title: "JoJonium Vol. 15 (Pet Shop)" },
-                    { id: "p3-v9", number: 9, title: "JoJonium Vol. 16 (DIO's World)" }
-                ]
-            },
-            {
-                id: 4,
-                name: "Part 4: Diamond is Unbreakable",
-                greekName: "Το Διαμάντι είναι Άθραυστο (Hardcover Edition)",
-                years: "1992–1995",
-                color: "from-pink-600 to-purple-900",
-                badgeBg: "bg-pink-900/40 text-pink-300 border-pink-700/50",
-                volumes: [
-                    { id: "p4-v1", number: 1, title: "Hardcover Vol. 1 (Josuke Higashikata)" },
-                    { id: "p4-v2", number: 2, title: "Hardcover Vol. 2 (Koichi Hirose)" },
-                    { id: "p4-v3", number: 3, title: "Hardcover Vol. 3 (Yukako Yamagishi)" },
-                    { id: "p4-v4", number: 4, title: "Hardcover Vol. 4 (Rohan Kishibe's Adventure)" },
-                    { id: "p4-v5", number: 5, title: "Hardcover Vol. 5 (Yoshikage Kira Wants to Live Quietly)" },
-                    { id: "p4-v6", number: 6, title: "Hardcover Vol. 6 (Atom Heart Father)" },
-                    { id: "p4-v7", number: 7, title: "Hardcover Vol. 7 (Highway Star)" },
-                    { id: "p4-v8", number: 8, title: "Hardcover Vol. 8 (Enigma Boy)" },
-                    { id: "p4-v9", number: 9, title: "Hardcover Vol. 9 (Crazy Diamond is Unbreakable)" }
-                ]
-            },
-            {
-                id: 5,
-                name: "Part 5: Golden Wind",
-                greekName: "Χρυσός Άνεμος (Hardcover Edition)",
-                years: "1995–1999",
-                color: "from-yellow-600 to-amber-900",
-                badgeBg: "bg-yellow-900/40 text-yellow-300 border-yellow-700/50",
-                volumes: [
-                    { id: "p5-v1", number: 1, title: "Hardcover Vol. 1 (Gold Experience)" },
-                    { id: "p5-v2", number: 2, title: "Hardcover Vol. 2 (Bucciarati Is Coming)" },
-                    { id: "p5-v3", number: 3, title: "Hardcover Vol. 3 (Soft Machine)" },
-                    { id: "p5-v4", number: 4, title: "Hardcover Vol. 4 (King Crimson)" },
-                    { id: "p5-v5", number: 5, title: "Hardcover Vol. 5 (The Venice Landing)" },
-                    { id: "p5-v6", number: 6, title: "Hardcover Vol. 6 (Green Day and Oasis)" },
-                    { id: "p5-v7", number: 7, title: "Hardcover Vol. 7 (His Name Is Diavolo)" },
-                    { id: "p5-v8", number: 8, title: "Hardcover Vol. 8 (The Gold Wind)" }
-                ]
-            },
-            {
-                id: 6,
-                name: "Part 6: Stone Ocean",
-                greekName: "Πέτρινος Ωκεανός (Hardcover Edition)",
-                years: "1999–2003",
-                color: "from-cyan-600 to-blue-900",
-                badgeBg: "bg-cyan-900/40 text-cyan-300 border-cyan-700/50",
-                volumes: [
-                    { id: "p6-v1", number: 1, title: "Hardcover Vol. 1 (Jolyne Cujoh)" },
-                    { id: "p6-v2", number: 2, title: "Hardcover Vol. 2 (The Visitor)" },
-                    { id: "p6-v3", number: 3, title: "Hardcover Vol. 3 (Savage Garden)" },
-                    { id: "p6-v4", number: 4, title: "Hardcover Vol. 4 (Ultra Security House Unit)" },
-                    { id: "p6-v5", number: 5, title: "Hardcover Vol. 5 (Yo-Yo Ma Is Coming!)" },
-                    { id: "p6-v6", number: 6, title: "Hardcover Vol. 6 (Heavy Weather)" },
-                    { id: "p6-v7", number: 7, title: "Hardcover Vol. 7 (Made in Heaven)" },
-                    { id: "p6-v8", number: 8, title: "Hardcover Vol. 8 (What a Wonderful World)" }
-                ]
-            },
-            {
-                id: 7,
-                name: "Part 7: Steel Ball Run",
-                greekName: "Αγώνας Σφαιρικού Χάλυβα (Αναμένεται Hardcover)",
-                years: "2004–2011",
-                color: "from-orange-600 to-red-950",
-                badgeBg: "bg-orange-900/40 text-orange-300 border-orange-700/50",
-                volumes: [
-                    { id: "p7-v1", number: 1, title: "Hardcover Vol. 1 (1st Stage)" },
-                    { id: "p7-v2", number: 2, title: "Hardcover Vol. 2 (Gyro Zeppeli)" }
-                ]
-            },
-            {
-                id: 8,
-                name: "Part 8: JoJolion",
-                greekName: "ΤζοΤζολίων (Paperback / Japanese)",
-                years: "2011–2021",
-                color: "from-violet-600 to-fuchsia-950",
-                badgeBg: "bg-violet-900/40 text-violet-300 border-violet-700/50",
-                volumes: [
-                    { id: "p8-v1", number: 1, title: "Vol. 1 (Welcome to Morioh Town)" },
-                    { id: "p8-v2", number: 2, title: "Vol. 2 (Soft & Wet)" }
-                ]
-            },
-            {
-                id: 9,
-                name: "Part 9: The JOJOLANDS",
-                greekName: "Οι ΤζοΤζο-Γαίες (Paperback / Japanese)",
-                years: "2023–Σήμερα",
-                color: "from-teal-600 to-emerald-950",
-                badgeBg: "bg-teal-900/40 text-teal-300 border-teal-700/50",
-                volumes: [
-                    { id: "p9-v1", number: 1, title: "Vol. 1 (Departure)" },
-                    { id: "p9-v2", number: 2, title: "Vol. 2 (Rohan Kishibe's Villa)" }
-                ]
-            }
-        ];
+    <!-- Parts Container -->
+    <div id="parts-container"></div>
+  </div>
 
-        // State Management
-        let userState = {
-            volumes: {},
-            details: {}
-        };
+  <!-- Modal for Volume Edit -->
+  <div class="modal-overlay" id="volume-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-vol-title">Volume Title</div>
+        <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
+      </div>
+      
+      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Κατάσταση:</div>
+      <div class="status-options">
+        <div class="status-btn" data-status="owned" onclick="setVolumeStatus('owned')">Έχω</div>
+        <div class="status-btn" data-status="wishlist" onclick="setVolumeStatus('wishlist')">Θέλω</div>
+        <div class="status-btn" data-status="missing" onclick="setVolumeStatus('missing')">Δεν έχω</div>
+      </div>
 
-        let selectedPartFilter = 'ALL';
-        let selectedStatusFilter = 'ALL';
+      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Σημειώσεις (π.χ. Τιμή, Γλώσσα, Κατάσταση):</div>
+      <textarea class="notes-textarea" id="modal-notes" placeholder="Γράψε σημειώσεις εδώ..."></textarea>
 
-        // Bind global functions to window so they are always accessible in onclick inline handlers
-        window.setStatusFilter = function(status) {
-            selectedStatusFilter = status;
-            document.querySelectorAll('.filter-status-btn').forEach(btn => {
-                btn.classList.remove('bg-purple-600', 'text-white', 'shadow');
-                btn.classList.add('text-gray-400');
-            });
-            const activeBtn = document.getElementById(`filter-status-${status}`);
-            if (activeBtn) {
-                activeBtn.classList.add('bg-purple-600', 'text-white', 'shadow');
-                activeBtn.classList.remove('text-gray-400');
-            }
-            renderApp();
-        };
+      <button class="btn" style="width: 100%; justify-content: center;" onclick="saveModalData()">Αποθήκευση</button>
+    </div>
+  </div>
 
-        window.setPartFilter = function(partId) {
-            selectedPartFilter = partId;
-            renderPartChips();
-            renderApp();
-        };
+  <footer>
+    <p>JoJo's Bizarre Adventure Hardcover Collector Tracker</p>
+    <p style="margin-top: 5px; opacity: 0.6;"><a href="#" onclick="resetDataConfirmation()" style="color: var(--jojo-red); text-decoration: none;">Επαναφορά Δεδομένων</a></p>
+  </footer>
 
-        window.setVolumeStatus = function(volId, status, event) {
-            if (event) event.stopPropagation();
-            userState.volumes[volId] = status;
-            saveToLocalStorage();
-            renderApp();
-            showToast(`Ενημερώθηκε: ${getStatusLabelGreek(status)}`);
-        };
+  <script>
+    // Official English Hardcover Editions Data (JoJoniums & Viz Hardcovers)
+    const jojoData = [
+      {
+        id: 1,
+        title: "Part 1: Phantom Blood (Hardcover)",
+        color: "var(--part1-color)",
+        volumes: [
+          { id: "p1-v1", title: "Volume 1", number: 1 },
+          { id: "p1-v2", title: "Volume 2", number: 2 },
+          { id: "p1-v3", title: "Volume 3", number: 3 }
+        ]
+      },
+      {
+        id: 2,
+        title: "Part 2: Battle Tendency (Hardcover)",
+        color: "var(--part2-color)",
+        volumes: [
+          { id: "p2-v1", title: "Volume 1", number: 1 },
+          { id: "p2-v2", title: "Volume 2", number: 2 },
+          { id: "p2-v3", title: "Volume 3", number: 3 },
+          { id: "p2-v4", title: "Volume 4", number: 4 }
+        ]
+      },
+      {
+        id: 3,
+        title: "Part 3: Stardust Crusaders (Hardcover)",
+        color: "var(--part3-color)",
+        volumes: [
+          { id: "p3-v1", title: "Volume 1", number: 1 },
+          { id: "p3-v2", title: "Volume 2", number: 2 },
+          { id: "p3-v3", title: "Volume 3", number: 3 },
+          { id: "p3-v4", title: "Volume 4", number: 4 },
+          { id: "p3-v5", title: "Volume 5", number: 5 },
+          { id: "p3-v6", title: "Volume 6", number: 6 },
+          { id: "p3-v7", title: "Volume 7", number: 7 },
+          { id: "p3-v8", title: "Volume 8", number: 8 },
+          { id: "p3-v9", title: "Volume 9", number: 9 }
+        ]
+      },
+      {
+        id: 4,
+        title: "Part 4: Diamond Is Unbreakable (Hardcover)",
+        color: "var(--part4-color)",
+        volumes: [
+          { id: "p4-v1", title: "Volume 1", number: 1 },
+          { id: "p4-v2", title: "Volume 2", number: 2 },
+          { id: "p4-v3", title: "Volume 3", number: 3 },
+          { id: "p4-v4", title: "Volume 4", number: 4 },
+          { id: "p4-v5", title: "Volume 5", number: 5 },
+          { id: "p4-v6", title: "Volume 6", number: 6 },
+          { id: "p4-v7", title: "Volume 7", number: 7 },
+          { id: "p4-v8", title: "Volume 8", number: 8 },
+          { id: "p4-v9", title: "Volume 9", number: 9 }
+        ]
+      },
+      {
+        id: 5,
+        title: "Part 5: Golden Wind (Hardcover)",
+        color: "var(--part5-color)",
+        volumes: [
+          { id: "p5-v1", title: "Volume 1", number: 1 },
+          { id: "p5-v2", title: "Volume 2", number: 2 },
+          { id: "p5-v3", title: "Volume 3", number: 3 },
+          { id: "p5-v4", title: "Volume 4", number: 4 },
+          { id: "p5-v5", title: "Volume 5", number: 5 },
+          { id: "p5-v6", title: "Volume 6", number: 6 },
+          { id: "p5-v7", title: "Volume 7", number: 7 },
+          { id: "p5-v8", title: "Volume 8", number: 8 }
+        ]
+      },
+      {
+        id: 6,
+        title: "Part 6: Stone Ocean (Hardcover)",
+        color: "var(--part6-color)",
+        volumes: [
+          { id: "p6-v1", title: "Volume 1", number: 1 },
+          { id: "p6-v2", title: "Volume 2", number: 2 },
+          { id: "p6-v3", title: "Volume 3", number: 3 },
+          { id: "p6-v4", title: "Volume 4", number: 4 },
+          { id: "p6-v5", title: "Volume 5", number: 5 },
+          { id: "p6-v6", title: "Volume 6", number: 6 },
+          { id: "p6-v7", title: "Volume 7", number: 7 },
+          { id: "p6-v8", title: "Volume 8", number: 8 }
+        ]
+      }
+    ];
 
-        window.toggleVolumeStatus = function(volId) {
-            const current = userState.volumes[volId] || 'MISSING';
-            let next = 'OWNED';
-            if (current === 'OWNED') next = 'WISHLIST';
-            else if (current === 'WISHLIST') next = 'MISSING';
-            
-            userState.volumes[volId] = next;
-            saveToLocalStorage();
-            renderApp();
-            showToast(`Ενημερώθηκε: ${getStatusLabelGreek(next)}`);
-        };
+    // App State
+    let userState = {};
+    let currentFilter = 'all';
+    let selectedVolumeId = null;
 
-        window.openModal = function(volId, title, partName) {
-            document.getElementById('modal-volume-id').value = volId;
-            document.getElementById('modal-volume-title').innerText = title;
-            document.getElementById('modal-part-title').innerText = partName;
-
-            const currentStatus = userState.volumes[volId] || 'MISSING';
-            const currentDetails = userState.details[volId] || {};
-
-            document.getElementById('modal-status').value = currentStatus;
-            document.getElementById('modal-edition').value = currentDetails.edition || '';
-            document.getElementById('modal-price').value = currentDetails.price || '';
-            document.getElementById('modal-notes').value = currentDetails.notes || '';
-
-            document.getElementById('notes-modal').classList.remove('hidden');
-        };
-
-        window.closeModal = function() {
-            document.getElementById('notes-modal').classList.add('hidden');
-        };
-
-        window.saveModalData = function(e) {
-            e.preventDefault();
-            const volId = document.getElementById('modal-volume-id').value;
-            const status = document.getElementById('modal-status').value;
-            const edition = document.getElementById('modal-edition').value.trim();
-            const price = document.getElementById('modal-price').value.trim();
-            const notes = document.getElementById('modal-notes').value.trim();
-
-            userState.volumes[volId] = status;
-            userState.details[volId] = { edition, price, notes };
-
-            saveToLocalStorage();
-            closeModal();
-            renderApp();
-            showToast('Οι λεπτομέρειες αποθηκεύτηκαν!');
-        };
-
-        window.resetDataConfirmation = function() {
-            if (confirm('Είστε σίγουροι ότι θέλετε να επαναφέρετε όλα τα δεδομένα της συλλογής σας; Η ενέργεια αυτή δεν αναιρείται.')) {
-                userState = { volumes: {}, details: {} };
-                saveToLocalStorage();
-                renderApp();
-                showToast('Η συλλογή μηδενίστηκε.');
-            }
-        };
-
-        window.exportData = function() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userState, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `jojo_manga_collection_${new Date().toISOString().slice(0,10)}.json`);
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-            showToast('Εξαγωγή αρχείου ολοκληρώθηκε!');
-        };
-
-        window.importData = function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedState = JSON.parse(e.target.result);
-                    if (importedState && typeof importedState === 'object' && importedState.volumes) {
-                        userState = importedState;
-                        saveToLocalStorage();
-                        renderApp();
-                        showToast('Επιτυχής εισαγωγή δεδομένων!');
-                    } else {
-                        alert('Μη έγκυρο αρχείο δεδομένων.');
-                    }
-                } catch (err) {
-                    alert('Σφάλμα κατά την ανάγνωση του αρχείου.');
-                }
-            };
-            reader.readAsText(file);
-        };
-
-        // Load data from LocalStorage
-        function loadFromLocalStorage() {
-            const savedState = localStorage.getItem('jojo_manga_collection_v1');
-            if (savedState) {
-                try {
-                    userState = JSON.parse(savedState);
-                } catch (e) {
-                    console.error("Failed to parse stored state", e);
-                }
-            }
+    // Load State from LocalStorage
+    function loadState() {
+      const saved = localStorage.getItem('jojo_manga_collection');
+      if (saved) {
+        try {
+          userState = JSON.parse(saved);
+        } catch(e) {
+          userState = {};
         }
+      }
+    }
 
-        // Save state to LocalStorage
-        function saveToLocalStorage() {
-            localStorage.setItem('jojo_manga_collection_v1', JSON.stringify(userState));
+    // Save State
+    function saveState() {
+      localStorage.setItem('jojo_manga_collection', JSON.stringify(userState));
+      renderApp();
+    }
+
+    // Window global functions
+    window.setStatusFilter = function(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      renderApp();
+    };
+
+    window.toggleVolumeStatus = function(volId, e) {
+      if (e) e.stopPropagation();
+      const current = userState[volId]?.status || 'missing';
+      let next = 'owned';
+      if (current === 'owned') next = 'wishlist';
+      else if (current === 'wishlist') next = 'missing';
+
+      if (!userState[volId]) userState[volId] = {};
+      userState[volId].status = next;
+      saveState();
+    };
+
+    window.openModal = function(volId) {
+      selectedVolumeId = volId;
+      let volObj = null;
+      jojoData.forEach(p => {
+        const found = p.volumes.find(v => v.id === volId);
+        if (found) volObj = found;
+      });
+
+      if (!volObj) return;
+
+      document.getElementById('modal-vol-title').innerText = volObj.title;
+      const status = userState[volId]?.status || 'missing';
+      const notes = userState[volId]?.notes || '';
+
+      document.querySelectorAll('.status-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.status === status);
+      });
+
+      document.getElementById('modal-notes').value = notes;
+      document.getElementById('volume-modal').classList.add('active');
+    };
+
+    window.closeModal = function() {
+      document.getElementById('volume-modal').classList.remove('active');
+      selectedVolumeId = null;
+    };
+
+    window.setVolumeStatus = function(status) {
+      document.querySelectorAll('.status-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.status === status);
+      });
+    };
+
+    window.saveModalData = function() {
+      if (!selectedVolumeId) return;
+      const activeBtn = document.querySelector('.status-btn.active');
+      const status = activeBtn ? activeBtn.dataset.status : 'missing';
+      const notes = document.getElementById('modal-notes').value;
+
+      userState[selectedVolumeId] = { status, notes };
+      saveState();
+      closeModal();
+    };
+
+    window.exportData = function() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userState));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `jojo_collection_backup.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    };
+
+    window.importData = function() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'application/json';
+      input.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsText(file, 'UTF-8');
+        reader.onload = readerEvent => {
+          try {
+            const content = JSON.parse(readerEvent.target.result);
+            userState = content;
+            saveState();
+            alert('Τα δεδομένα φορτώθηκαν επιτυχώς!');
+          } catch(err) {
+            alert('Σφάλμα κατά τη φόρτωση του αρχείου.');
+          }
         }
+      }
+      input.click();
+    };
 
-        function getStatusLabelGreek(status) {
-            switch(status) {
-                case 'OWNED': return 'Το έχεις ✅';
-                case 'WISHLIST': return 'Στη Wishlist ⭐';
-                default: return 'Λείπει ❌';
-            }
-        }
+    window.resetDataConfirmation = function() {
+      if (confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις όλη την πρόοδο;')) {
+        userState = {};
+        saveState();
+      }
+    };
 
-        // Render Part Navigation Filter Chips
-        function renderPartChips() {
-            const container = document.getElementById('part-chips-container');
-            let html = `
-                <button onclick="setPartFilter('ALL')" class="part-chip px-3 py-1.5 text-xs font-bold rounded-xl border transition whitespace-nowrap ${selectedPartFilter === 'ALL' ? 'bg-jojo-gold text-black border-jojo-gold shadow-md' : 'bg-jojo-dark text-gray-400 border-jojo-cardBorder hover:border-gray-500'}">
-                    Όλα τα Parts
-                </button>
-            `;
+    // Render Function
+    function renderApp() {
+      const searchQuery = document.getElementById('search-input').value.toLowerCase();
+      const partsContainer = document.getElementById('parts-container');
+      partsContainer.innerHTML = '';
 
-            JOJO_DATA.forEach(part => {
-                const isActive = selectedPartFilter === part.id;
-                html += `
-                    <button onclick="setPartFilter(${part.id})" class="part-chip px-3 py-1.5 text-xs font-bold rounded-xl border transition whitespace-nowrap ${isActive ? 'bg-purple-600 text-white border-purple-500 shadow-md' : 'bg-jojo-dark text-gray-400 border-jojo-cardBorder hover:border-gray-500'}">
-                        Part ${part.id}
-                    </button>
-                `;
-            });
+      let totalVolumes = 0;
+      let ownedCount = 0;
+      let wishlistCount = 0;
+      let missingCount = 0;
 
-            container.innerHTML = html;
-        }
+      jojoData.forEach(part => {
+        let partOwned = 0;
+        let visibleVolumesCount = 0;
 
-        // Main Render Function
-        function renderApp() {
-            const searchQuery = document.getElementById('search-input') ? document.getElementById('search-input').value.toLowerCase().trim() : '';
-            const container = document.getElementById('manga-parts-container');
-            if (!container) return;
-            container.innerHTML = '';
+        const partCard = document.createElement('div');
+        partCard.className = 'part-section';
 
-            let totalVolumesCount = 0;
-            let ownedCount = 0;
-            let wishlistCount = 0;
-            let missingCount = 0;
+        let volumesHTML = '';
 
-            // Compute global stats first
-            JOJO_DATA.forEach(part => {
-                part.volumes.forEach(vol => {
-                    totalVolumesCount++;
-                    const status = userState.volumes[vol.id] || 'MISSING';
-                    if (status === 'OWNED') ownedCount++;
-                    else if (status === 'WISHLIST') wishlistCount++;
-                    else missingCount++;
-                });
-            });
+        part.volumes.forEach(vol => {
+          totalVolumes++;
+          const volState = userState[vol.id] || { status: 'missing', notes: '' };
+          const status = volState.status;
 
-            // Update Header / Dashboard Stats
-            const overallPercent = totalVolumesCount > 0 ? Math.round((ownedCount / totalVolumesCount) * 100) : 0;
-            document.getElementById('overall-percentage').innerText = `${overallPercent}%`;
-            document.getElementById('overall-progress-bar').style.width = `${overallPercent}%`;
-            document.getElementById('total-owned-count').innerText = ownedCount;
-            document.getElementById('total-volumes-count').innerText = totalVolumesCount;
+          if (status === 'owned') ownedCount++;
+          else if (status === 'wishlist') wishlistCount++;
+          else missingCount++;
 
-            document.getElementById('stat-owned').innerText = ownedCount;
-            document.getElementById('stat-owned-sub').innerText = `${overallPercent}% του συνολικού έργου`;
+          if (status === 'owned') partOwned++;
 
-            document.getElementById('stat-wishlist').innerText = wishlistCount;
-            document.getElementById('stat-missing').innerText = missingCount;
-            document.getElementById('stat-needed-sub').innerText = `${totalVolumesCount - ownedCount} τόμοι ακόμα για πλήρη συλλογή`;
+          // Filters
+          if (currentFilter !== 'all' && status !== currentFilter) return;
+          if (searchQuery && !vol.title.toLowerCase().includes(searchQuery) && !part.title.toLowerCase().includes(searchQuery)) return;
 
-            // Filter & Render Parts
-            let visiblePartsCount = 0;
+          visibleVolumesCount++;
 
-            JOJO_DATA.forEach(part => {
-                // Filter by Part Chip
-                if (selectedPartFilter !== 'ALL' && selectedPartFilter !== part.id) return;
+          let statusText = 'ΛΕΙΠΕΙ';
+          if (status === 'owned') statusText = 'ΕΧΩ';
+          if (status === 'wishlist') statusText = 'ΘΕΛΩ';
 
-                // Calculate Part-Specific Stats
-                let partOwned = 0;
-                let partTotal = part.volumes.length;
-
-                part.volumes.forEach(v => {
-                    if ((userState.volumes[v.id] || 'MISSING') === 'OWNED') partOwned++;
-                });
-
-                // Filter Volumes inside this part based on search & status filter
-                const filteredVolumes = part.volumes.filter(vol => {
-                    const status = userState.volumes[vol.id] || 'MISSING';
-                    
-                    // Filter Status
-                    if (selectedStatusFilter !== 'ALL' && status !== selectedStatusFilter) return false;
-
-                    // Filter Search
-                    if (searchQuery) {
-                        const matchNumber = vol.number.toString().includes(searchQuery);
-                        const matchTitle = vol.title.toLowerCase().includes(searchQuery);
-                        const matchPart = part.name.toLowerCase().includes(searchQuery);
-                        const matchGreek = part.greekName.toLowerCase().includes(searchQuery);
-                        return matchNumber || matchTitle || matchPart || matchGreek;
-                    }
-
-                    return true;
-                });
-
-                // Skip rendering empty parts during filtering
-                if (filteredVolumes.length === 0 && (searchQuery || selectedStatusFilter !== 'ALL')) return;
-
-                visiblePartsCount++;
-
-                const partPercent = Math.round((partOwned / partTotal) * 100);
-
-                // Build Part HTML Element
-                const partCard = document.createElement('div');
-                partCard.className = 'bg-jojo-card border border-jojo-cardBorder rounded-2xl overflow-hidden shadow-xl';
-
-                partCard.innerHTML = `
-                    <!-- Part Header Banner -->
-                    <div class="bg-gradient-to-r ${part.color} p-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <span class="px-2.5 py-0.5 rounded-md text-xs font-black uppercase tracking-wider bg-black/40 border border-white/20">
-                                    ${part.years}
-                                </span>
-                                <span class="text-xs font-semibold text-white/80">${part.greekName}</span>
-                            </div>
-                            <h2 class="text-2xl font-black tracking-wide mt-1">${part.name}</h2>
-                        </div>
-                        <!-- Part Progress Pill -->
-                        <div class="bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center gap-3 min-w-[180px]">
-                            <div class="flex-1">
-                                <div class="flex justify-between text-xs font-bold mb-1">
-                                    <span>Πρόοδος</span>
-                                    <span>${partOwned}/${partTotal}</span>
-                                </div>
-                                <div class="w-full bg-gray-900/80 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-jojo-gold h-full rounded-full transition-all duration-300" style="width: ${partPercent}%"></div>
-                                </div>
-                            </div>
-                            <span class="text-sm font-black text-jojo-gold">${partPercent}%</span>
-                        </div>
-                    </div>
-
-                    <!-- Volumes Grid -->
-                    <div class="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                        ${filteredVolumes.map(vol => {
-                            const status = userState.volumes[vol.id] || 'MISSING';
-                            const details = userState.details[vol.id] || {};
-                            const hasDetails = details.notes || details.edition || details.price;
-
-                            let statusBadge = '';
-                            let cardStyle = '';
-
-                            if (status === 'OWNED') {
-                                cardStyle = 'status-owned border-l-4 border-l-green-500';
-                                statusBadge = `<span class="text-xs font-bold text-green-400 bg-green-950/60 px-2 py-0.5 rounded-md border border-green-800/50"><i class="fa-solid fa-check mr-1"></i> Έχω</span>`;
-                            } else if (status === 'WISHLIST') {
-                                cardStyle = 'status-wishlist border-l-4 border-l-yellow-500';
-                                statusBadge = `<span class="text-xs font-bold text-yellow-400 bg-yellow-950/60 px-2 py-0.5 rounded-md border border-yellow-800/50"><i class="fa-solid fa-star mr-1"></i> Wishlist</span>`;
-                            } else {
-                                cardStyle = 'status-missing border-l-4 border-l-gray-600';
-                                statusBadge = `<span class="text-xs font-bold text-gray-400 bg-gray-900 px-2 py-0.5 rounded-md border border-gray-700/50"><i class="fa-solid fa-xmark mr-1"></i> Λείπει</span>`;
-                            }
-
-                            return `
-                                <div class="bg-jojo-dark/70 hover:bg-jojo-dark border border-jojo-cardBorder rounded-xl p-3.5 transition-all duration-200 flex flex-col justify-between group relative ${cardStyle}">
-                                    <div>
-                                        <div class="flex items-center justify-between mb-2">
-                                            <span class="text-xs font-black px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/40">
-                                                Vol. ${vol.number}
-                                            </span>
-                                            ${statusBadge}
-                                        </div>
-                                        <h3 class="text-sm font-bold text-gray-200 line-clamp-2 leading-snug group-hover:text-white transition">
-                                            ${vol.title}
-                                        </h3>
-                                        
-                                        <!-- Extra user details preview if exists -->
-                                        ${hasDetails ? `
-                                            <div class="mt-2 text-[11px] text-gray-400 bg-black/30 p-2 rounded border border-gray-800/60 space-y-0.5">
-                                                ${details.edition ? `<div class="truncate"><i class="fa-solid fa-book-open text-purple-400 mr-1"></i>${escapeHtml(details.edition)}</div>` : ''}
-                                                ${details.price ? `<div><i class="fa-solid fa-tag text-green-400 mr-1"></i>${escapeHtml(details.price)}</div>` : ''}
-                                                ${details.notes ? `<div class="truncate text-gray-500"><i class="fa-solid fa-comment text-gray-500 mr-1"></i>${escapeHtml(details.notes)}</div>` : ''}
-                                            </div>
-                                        ` : ''}
-                                    </div>
-
-                                    <!-- Quick Action Buttons -->
-                                    <div class="mt-4 pt-2 border-t border-jojo-cardBorder/60 flex items-center justify-between gap-1">
-                                        <div class="flex items-center gap-1">
-                                            <button title="Έχω" onclick="setVolumeStatus('${vol.id}', 'OWNED', event)" class="p-1.5 rounded-lg text-xs ${status === 'OWNED' ? 'bg-green-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-green-400'} transition">
-                                                <i class="fa-solid fa-check"></i>
-                                            </button>
-                                            <button title="Επιθυμία" onclick="setVolumeStatus('${vol.id}', 'WISHLIST', event)" class="p-1.5 rounded-lg text-xs ${status === 'WISHLIST' ? 'bg-yellow-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-yellow-400'} transition">
-                                                <i class="fa-solid fa-star"></i>
-                                            </button>
-                                            <button title="Λείπει" onclick="setVolumeStatus('${vol.id}', 'MISSING', event)" class="p-1.5 rounded-lg text-xs ${status === 'MISSING' ? 'bg-gray-700 text-white' : 'bg-gray-800 text-gray-400 hover:text-red-400'} transition">
-                                                <i class="fa-solid fa-xmark"></i>
-                                            </button>
-                                        </div>
-
-                                        <button title="Επεξεργασία Σημειώσεων" onclick="openModal('${vol.id}', '${escapeHtml(vol.title)}', 'Part ${part.id}: ${escapeHtml(part.name)}')" class="p-1.5 rounded-lg text-xs bg-gray-800 hover:bg-purple-900/60 text-gray-400 hover:text-purple-300 transition border border-gray-700">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                `;
-
-                container.appendChild(partCard);
-            });
-
-            // If search/filter resulted in no items
-            if (visiblePartsCount === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 bg-jojo-card border border-jojo-cardBorder rounded-2xl p-6">
-                        <i class="fa-solid fa-ghost text-4xl text-purple-500 mb-3 block"></i>
-                        <h3 class="text-lg font-bold text-gray-200">Δεν βρέθηκαν τόμοι</h3>
-                        <p class="text-xs text-gray-400 mt-1">Δοκιμάστε να αλλάξετε τα φίλτρα ή την αναζήτηση.</p>
-                    </div>
-                `;
-            }
-        }
-
-        // Toast Notification Helper
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            if (!toast) return;
-            document.getElementById('toast-message').innerText = message;
-            toast.classList.remove('opacity-0', 'translate-y-5', 'pointer-events-none');
-            
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-5', 'pointer-events-none');
-            }, 2500);
-        }
-
-        // Utility HTML Escaper
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace font(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-        }
-
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            loadFromLocalStorage();
-            renderPartChips();
-            renderApp();
-
-            // Register Service Worker for offline PWA support
-            if ('serviceWorker' in navigator) {
-                const swCode = `
-                    self.addEventListener('install', (e) => self.skipWaiting());
-                    self.addEventListener('activate', (e) => self.clients.claim());
-                    self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
-                `;
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
-            }
+          volumesHTML += `
+            <div class="volume-card status-${status}" onclick="openModal('${vol.id}')">
+              <div>
+                <div class="volume-number">Vol. ${vol.number}</div>
+                <div class="volume-title">${vol.title}</div>
+              </div>
+              <div class="volume-status-tag">${statusText}</div>
+            </div>
+          `;
         });
-    </script>
+
+        if (visibleVolumesCount > 0) {
+          const partPercent = Math.round((partOwned / part.volumes.length) * 100);
+          partCard.innerHTML = `
+            <div class="part-header">
+              <div class="part-title-area">
+                <div class="part-badge" style="background: ${part.color}"></div>
+                <div class="part-title">${part.title}</div>
+              </div>
+              <div class="part-stats">${partOwned} / ${part.volumes.length} (${partPercent}%)</div>
+            </div>
+            <div class="volumes-grid">
+              ${volumesHTML}
+            </div>
+          `;
+          partsContainer.appendChild(partCard);
+        }
+      });
+
+      // Update Overall Stats
+      const totalPercent = totalVolumes > 0 ? Math.round((ownedCount / totalVolumes) * 100) : 0;
+      document.getElementById('total-percent').innerText = `${totalPercent}%`;
+      document.getElementById('total-count-text').innerText = `${ownedCount} / ${totalVolumes} Τόμοι`;
+      document.getElementById('total-progress-bar').style.width = `${totalPercent}%`;
+      
+      document.getElementById('owned-count').innerText = ownedCount;
+      document.getElementById('wishlist-count').innerText = wishlistCount;
+      document.getElementById('missing-count').innerText = missingCount;
+    }
+
+    // Initialize App
+    loadState();
+    renderApp();
+  </script>
 </body>
 </html>
