@@ -32,6 +32,7 @@
       --jojo-green: #22c55e;
       --jojo-red: #ef4444;
       
+      /* Νέα Χρώματα Parts */
       --part1-color: #10b981;
       --part2-color: #ef4444;
       --part3-color: #3b82f6;
@@ -555,15 +556,16 @@
   </footer>
 
   <script>
+    // Σύνδεση με αρχεία .jpeg στον φάκελο ./covers/
     const jojoData = [
       {
         id: 1,
         title: "Part 1: Phantom Blood (Hardcover)",
         color: "var(--part1-color)",
         volumes: [
-          { id: "p1-v1", title: "Volume 1", number: 1, cover: "https://images.openlibrary.org/b/isbn/9781421578798-M.jpg" },
-          { id: "p1-v2", title: "Volume 2", number: 2, cover: "https://images.openlibrary.org/b/isbn/9781421578804-M.jpg" },
-          { id: "p1-v3", title: "Volume 3", number: 3, cover: "https://images.openlibrary.org/b/isbn/9781421578811-M.jpg" }
+          { id: "p1-v1", title: "Volume 1", number: 1, cover: "./covers/p1-v1.jpeg" },
+          { id: "p1-v2", title: "Volume 2", number: 2, cover: "./covers/p1-v2.jpeg" },
+          { id: "p1-v3", title: "Volume 3", number: 3, cover: "./covers/p1-v3.jpeg" }
         ]
       },
       {
@@ -571,10 +573,10 @@
         title: "Part 2: Battle Tendency (Hardcover)",
         color: "var(--part2-color)",
         volumes: [
-          { id: "p2-v1", title: "Volume 1", number: 1, cover: "https://images.openlibrary.org/b/isbn/9781421578828-M.jpg" },
-          { id: "p2-v2", title: "Volume 2", number: 2, cover: "https://images.openlibrary.org/b/isbn/9781421578835-M.jpg" },
-          { id: "p2-v3", title: "Volume 3", number: 3, cover: "https://images.openlibrary.org/b/isbn/9781421578842-M.jpg" },
-          { id: "p2-v4", title: "Volume 4", number: 4, cover: "https://images.openlibrary.org/b/isbn/9781421578859-M.jpg" }
+          { id: "p2-v1", title: "Volume 1", number: 1, cover: "./covers/p2-v1.jpeg" },
+          { id: "p2-v2", title: "Volume 2", number: 2, cover: "./covers/p2-v2.jpeg" },
+          { id: "p2-v3", title: "Volume 3", number: 3, cover: "./covers/p2-v3.jpeg" },
+          { id: "p2-v4", title: "Volume 4", number: 4, cover: "./covers/p2-v4.jpeg" }
         ]
       },
       {
@@ -582,15 +584,15 @@
         title: "Part 3: Stardust Crusaders (Hardcover)",
         color: "var(--part3-color)",
         volumes: [
-          { id: "p3-v1", title: "Volume 1", number: 1, cover: "https://images.openlibrary.org/b/isbn/9781421590608-M.jpg" },
-          { id: "p3-v2", title: "Volume 2", number: 2, cover: "https://images.openlibrary.org/b/isbn/9781421590615-M.jpg" },
-          { id: "p3-v3", title: "Volume 3", number: 3, cover: "https://images.openlibrary.org/b/isbn/9781421590622-M.jpg" },
-          { id: "p3-v4", title: "Volume 4", number: 4, cover: "https://images.openlibrary.org/b/isbn/9781421590639-M.jpg" },
-          { id: "p3-v5", title: "Volume 5", number: 5, cover: "https://images.openlibrary.org/b/isbn/9781421590646-M.jpg" },
-          { id: "p3-v6", title: "Volume 6", number: 6, cover: "https://images.openlibrary.org/b/isbn/9781421590653-M.jpg" },
-          { id: "p3-v7", title: "Volume 7", number: 7, cover: "https://images.openlibrary.org/b/isbn/9781421590660-M.jpg" },
-          { id: "p3-v8", title: "Volume 8", number: 8, cover: "https://images.openlibrary.org/b/isbn/9781421590677-M.jpg" },
-          { id: "p3-v9", title: "Volume 9", number: 9, cover: "https://images.openlibrary.org/b/isbn/9781421590684-M.jpg" }
+          { id: "p3-v1", title: "Volume 1", number: 1, cover: "./covers/p3-v1.jpeg" },
+          { id: "p3-v2", title: "Volume 2", number: 2, cover: "./covers/p3-v2.jpeg" },
+          { id: "p3-v3", title: "Volume 3", number: 3, cover: "./covers/p3-v3.jpeg" },
+          { id: "p3-v4", title: "Volume 4", number: 4, cover: "./covers/p3-v4.jpeg" },
+          { id: "p3-v5", title: "Volume 5", number: 5, cover: "./covers/p3-v5.jpeg" },
+          { id: "p3-v6", title: "Volume 6", number: 6, cover: "./covers/p3-v6.jpeg" },
+          { id: "p3-v7", title: "Volume 7", number: 7, cover: "./covers/p3-v7.jpeg" },
+          { id: "p3-v8", title: "Volume 8", number: 8, cover: "./covers/p3-v8.jpeg" },
+          { id: "p3-v9", title: "Volume 9", number: 9, cover: "./covers/p3-v9.jpeg" }
         ]
       },
       {
@@ -598,15 +600,15 @@
         title: "Part 4: Diamond Is Unbreakable (Hardcover)",
         color: "var(--part4-color)",
         volumes: [
-          { id: "p4-v1", title: "Volume 1", number: 1, cover: "https://images.openlibrary.org/b/isbn/9781974705283-M.jpg" },
-          { id: "p4-v2", title: "Volume 2", number: 2, cover: "https://images.openlibrary.org/b/isbn/9781974705290-M.jpg" },
-          { id: "p4-v3", title: "Volume 3", number: 3, cover: "https://images.openlibrary.org/b/isbn/9781974705306-M.jpg" },
-          { id: "p4-v4", title: "Volume 4", number: 4, cover: "https://images.openlibrary.org/b/isbn/9781974705313-M.jpg" },
-          { id: "p4-v5", title: "Volume 5", number: 5, cover: "https://images.openlibrary.org/b/isbn/9781974705320-M.jpg" },
-          { id: "p4-v6", title: "Volume 6", number: 6, cover: "https://images.openlibrary.org/b/isbn/9781974705337-M.jpg" },
-          { id: "p4-v7", title: "Volume 7", number: 7, cover: "https://images.openlibrary.org/b/isbn/9781974705344-M.jpg" },
-          { id: "p4-v8", title: "Volume 8", number: 8, cover: "https://images.openlibrary.org/b/isbn/9781974705351-M.jpg" },
-          { id: "p4-v9", title: "Volume 9", number: 9, cover: "https://images.openlibrary.org/b/isbn/9781974705368-M.jpg" }
+          { id: "p4-v1", title: "Volume 1", number: 1, cover: "./covers/p4-v1.jpeg" },
+          { id: "p4-v2", title: "Volume 2", number: 2, cover: "./covers/p4-v2.jpeg" },
+          { id: "p4-v3", title: "Volume 3", number: 3, cover: "./covers/p4-v3.jpeg" },
+          { id: "p4-v4", title: "Volume 4", number: 4, cover: "./covers/p4-v4.jpeg" },
+          { id: "p4-v5", title: "Volume 5", number: 5, cover: "./covers/p4-v5.jpeg" },
+          { id: "p4-v6", title: "Volume 6", number: 6, cover: "./covers/p4-v6.jpeg" },
+          { id: "p4-v7", title: "Volume 7", number: 7, cover: "./covers/p4-v7.jpeg" },
+          { id: "p4-v8", title: "Volume 8", number: 8, cover: "./covers/p4-v8.jpeg" },
+          { id: "p4-v9", title: "Volume 9", number: 9, cover: "./covers/p4-v9.jpeg" }
         ]
       },
       {
@@ -614,14 +616,14 @@
         title: "Part 5: Golden Wind (Hardcover)",
         color: "var(--part5-color)",
         volumes: [
-          { id: "p5-v1", title: "Volume 1", number: 1, cover: "https://images.openlibrary.org/b/isbn/9781974721498-M.jpg" },
-          { id: "p5-v2", title: "Volume 2", number: 2, cover: "https://images.openlibrary.org/b/isbn/9781974721504-M.jpg" },
-          { id: "p5-v3", title: "Volume 3", number: 3, cover: "https://images.openlibrary.org/b/isbn/9781974721511-M.jpg" },
-          { id: "p5-v4", title: "Volume 4", number: 4, cover: "https://images.openlibrary.org/b/isbn/9781974721528-M.jpg" },
-          { id: "p5-v5", title: "Volume 5", number: 5, cover: "https://images.openlibrary.org/b/isbn/9781974721535-M.jpg" },
-          { id: "p5-v6", title: "Volume 6", number: 6, cover: "https://images.openlibrary.org/b/isbn/9781974721542-M.jpg" },
-          { id: "p5-v7", title: "Volume 7", number: 7, cover: "https://images.openlibrary.org/b/isbn/9781974721559-M.jpg" },
-          { id: "p5-v8", title: "Volume 8", number: 8, cover: "https://images.openlibrary.org/b/isbn/9781974721566-M.jpg" }
+          { id: "p5-v1", title: "Volume 1", number: 1, cover: "./covers/p5-v1.jpeg" },
+          { id: "p5-v2", title: "Volume 2", number: 2, cover: "./covers/p5-v2.jpeg" },
+          { id: "p5-v3", title: "Volume 3", number: 3, cover: "./covers/p5-v3.jpeg" },
+          { id: "p5-v4", title: "Volume 4", number: 4, cover: "./covers/p5-v4.jpeg" },
+          { id: "p5-v5", title: "Volume 5", number: 5, cover: "./covers/p5-v5.jpeg" },
+          { id: "p5-v6", title: "Volume 6", number: 6, cover: "./covers/p5-v6.jpeg" },
+          { id: "p5-v7", title: "Volume 7", number: 7, cover: "./covers/p5-v7.jpeg" },
+          { id: "p5-v8", title: "Volume 8", number: 8, cover: "./covers/p5-v8.jpeg" }
         ]
       },
       {
@@ -629,14 +631,14 @@
         title: "Part 6: Stone Ocean (Hardcover)",
         color: "var(--part6-color)",
         volumes: [
-          { id: "p6-v1", title: "Volume 1", number: 1, cover: "https://images.openlibrary.org/b/isbn/9781974740260-M.jpg" },
-          { id: "p6-v2", title: "Volume 2", number: 2, cover: "https://images.openlibrary.org/b/isbn/9781974740277-M.jpg" },
-          { id: "p6-v3", title: "Volume 3", number: 3, cover: "https://images.openlibrary.org/b/isbn/9781974740284-M.jpg" },
-          { id: "p6-v4", title: "Volume 4", number: 4, cover: "https://images.openlibrary.org/b/isbn/9781974740291-M.jpg" },
-          { id: "p6-v5", title: "Volume 5", number: 5, cover: "https://images.openlibrary.org/b/isbn/9781974740307-M.jpg" },
-          { id: "p6-v6", title: "Volume 6", number: 6, cover: "https://images.openlibrary.org/b/isbn/9781974740314-M.jpg" },
-          { id: "p6-v7", title: "Volume 7", number: 7, cover: "https://images.openlibrary.org/b/isbn/9781974740321-M.jpg" },
-          { id: "p6-v8", title: "Volume 8", number: 8, cover: "https://images.openlibrary.org/b/isbn/9781974740338-M.jpg" }
+          { id: "p6-v1", title: "Volume 1", number: 1, cover: "./covers/p6-v1.jpeg" },
+          { id: "p6-v2", title: "Volume 2", number: 2, cover: "./covers/p6-v2.jpeg" },
+          { id: "p6-v3", title: "Volume 3", number: 3, cover: "./covers/p6-v3.jpeg" },
+          { id: "p6-v4", title: "Volume 4", number: 4, cover: "./covers/p6-v4.jpeg" },
+          { id: "p6-v5", title: "Volume 5", number: 5, cover: "./covers/p6-v5.jpeg" },
+          { id: "p6-v6", title: "Volume 6", number: 6, cover: "./covers/p6-v6.jpeg" },
+          { id: "p6-v7", title: "Volume 7", number: 7, cover: "./covers/p6-v7.jpeg" },
+          { id: "p6-v8", title: "Volume 8", number: 8, cover: "./covers/p6-v8.jpeg" }
         ]
       }
     ];
