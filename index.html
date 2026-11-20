@@ -15,7 +15,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Over+the+Rainbow&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,19 +29,15 @@
       --jojo-purple: #9333ea;
       --jojo-pink: #ec4899;
       --jojo-gold: #eab308;
-      --jojo-cyan: #06b6d4;
       --jojo-green: #22c55e;
       --jojo-red: #ef4444;
       
-      --part1-color: #3b82f6; /* Phantom Blood Blue */
-      --part2-color: #10b981; /* Battle Tendency Green */
-      --part3-color: #ef4444; /* Stardust Crusaders Red */
-      --part4-color: #a855f7; /* Diamond is Unbreakable Purple */
-      --part5-color: #eab308; /* Golden Wind Gold */
-      --part6-color: #ec4899; /* Stone Ocean Pink */
-      --part7-color: #f97316; /* Steel Ball Run Orange */
-      --part8-color: #14b8a6; /* JoJolion Teal */
-      --part9-color: #8b5cf6; /* The JOJOLands Violet */
+      --part1-color: #3b82f6;
+      --part2-color: #10b981;
+      --part3-color: #ef4444;
+      --part4-color: #a855f7;
+      --part5-color: #eab308;
+      --part6-color: #ec4899;
       
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -66,7 +62,6 @@
       padding-bottom: 50px;
     }
 
-    /* Header & Menus */
     header {
       background: rgba(11, 8, 19, 0.85);
       backdrop-filter: blur(12px);
@@ -95,15 +90,8 @@
       background: linear-gradient(135deg, #eab308, #ec4899, #9333ea);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
     }
 
-    .logo i {
-      -webkit-text-fill-color: initial;
-      color: var(--jojo-pink);
-    }
-
-    /* Action Buttons */
     .btn {
       background: rgba(147, 51, 234, 0.2);
       border: 1px solid var(--jojo-purple);
@@ -113,18 +101,11 @@
       cursor: pointer;
       font-weight: 600;
       font-size: 0.85rem;
-      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .btn:hover {
-      background: var(--jojo-purple);
-      box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
-    }
-
-    /* Stats Overview */
     .container {
       max-width: 1200px;
       margin: 20px auto;
@@ -143,7 +124,6 @@
       border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 18px;
-      backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
     }
@@ -151,21 +131,15 @@
     .stat-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
+      top: 0; left: 0; width: 4px; height: 100%;
       background: var(--jojo-purple);
     }
-
     .stat-card.owned::before { background: var(--jojo-green); }
-    .stat-card.missing::before { background: var(--jojo-red); }
     .stat-card.wishlist::before { background: var(--jojo-gold); }
 
     .stat-title {
       font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
       color: var(--text-muted);
       margin-bottom: 5px;
     }
@@ -192,10 +166,8 @@
       background: linear-gradient(90deg, var(--jojo-purple), var(--jojo-pink));
       width: 0%;
       transition: width 0.5s ease;
-      border-radius: 10px;
     }
 
-    /* Controls Bar */
     .controls {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -222,19 +194,12 @@
       border: 1px solid var(--card-border);
       border-radius: 8px;
       color: #fff;
-      font-family: inherit;
       outline: none;
-    }
-
-    .search-box input:focus {
-      border-color: var(--jojo-purple);
-      box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
     }
 
     .search-box i {
       position: absolute;
-      left: 12px;
-      top: 50%;
+      left: 12px; top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
     }
@@ -253,7 +218,6 @@
       color: var(--text-muted);
       cursor: pointer;
       font-size: 0.8rem;
-      transition: all 0.2s;
     }
 
     .filter-btn.active {
@@ -262,14 +226,12 @@
       border-color: var(--jojo-purple);
     }
 
-    /* Parts & Volumes Section */
     .part-section {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
       margin-bottom: 25px;
       overflow: hidden;
-      backdrop-filter: blur(10px);
     }
 
     .part-header {
@@ -288,15 +250,12 @@
     }
 
     .part-badge {
-      width: 12px;
-      height: 25px;
-      border-radius: 3px;
+      width: 12px; height: 25px; border-radius: 3px;
     }
 
     .part-title {
       font-family: 'Bebas Neue', cursive;
       font-size: 1.5rem;
-      letter-spacing: 1px;
     }
 
     .part-stats {
@@ -304,59 +263,82 @@
       color: var(--text-muted);
     }
 
+    /* Grid με Εξώφυλλα */
     .volumes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
       padding: 15px;
     }
 
     .volume-card {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
       cursor: pointer;
       transition: all 0.2s ease;
-      position: relative;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      min-height: 120px;
+      position: relative;
     }
 
     .volume-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .cover-container {
+      width: 100%;
+      height: 190px;
+      background: rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .volume-card:hover .cover-img {
+      transform: scale(1.05);
+    }
+
+    .volume-info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+      text-align: center;
     }
 
     .volume-number {
       font-size: 0.75rem;
       color: var(--text-muted);
-      margin-bottom: 4px;
     }
 
     .volume-title {
       font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
+      font-size: 0.85rem;
+      margin: 3px 0 8px 0;
       line-height: 1.2;
     }
 
     .volume-status-tag {
       font-size: 0.7rem;
-      padding: 3px 6px;
+      padding: 4px;
       border-radius: 4px;
       font-weight: 700;
       text-transform: uppercase;
-      margin-top: 5px;
     }
 
-    /* Volume Status Styles */
+    /* Status Colors */
     .status-owned {
-      border: 1px solid var(--jojo-green) !important;
-      background: rgba(34, 197, 94, 0.1) !important;
+      border-color: var(--jojo-green) !important;
     }
     .status-owned .volume-status-tag {
       background: var(--jojo-green);
@@ -364,8 +346,7 @@
     }
 
     .status-wishlist {
-      border: 1px solid var(--jojo-gold) !important;
-      background: rgba(234, 179, 8, 0.1) !important;
+      border-color: var(--jojo-gold) !important;
     }
     .status-wishlist .volume-status-tag {
       background: var(--jojo-gold);
@@ -373,21 +354,18 @@
     }
 
     .status-missing {
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .status-missing .volume-status-tag {
       background: rgba(255, 255, 255, 0.1);
       color: var(--text-muted);
     }
 
-    /* Modal for Details */
+    /* Modal */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(5px);
       display: flex;
       align-items: center;
@@ -395,7 +373,7 @@
       z-index: 1000;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.2s;
     }
 
     .modal-overlay.active {
@@ -410,7 +388,6 @@
       width: 90%;
       max-width: 400px;
       padding: 20px;
-      box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
     }
 
     .modal-header {
@@ -418,11 +395,6 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
-    }
-
-    .modal-title {
-      font-size: 1.2rem;
-      font-weight: 700;
     }
 
     .modal-close {
@@ -466,7 +438,6 @@
       margin-bottom: 15px;
     }
 
-    /* Footer */
     footer {
       text-align: center;
       color: var(--text-muted);
@@ -490,7 +461,6 @@
   </header>
 
   <div class="container">
-    <!-- Overall Stats -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-title">Συνολική Πρόοδος</div>
@@ -520,11 +490,10 @@
       </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="search-input" placeholder="Αναζήτηση τόμου ή Part..." oninput="renderApp()">
+        <input type="text" id="search-input" placeholder="Αναζήτηση..." oninput="renderApp()">
       </div>
       <div class="filter-group">
         <button class="filter-btn active" data-filter="all" onclick="setStatusFilter('all')">Όλα</button>
@@ -534,11 +503,9 @@
       </div>
     </div>
 
-    <!-- Parts Container -->
     <div id="parts-container"></div>
   </div>
 
-  <!-- Modal for Volume Edit -->
   <div class="modal-overlay" id="volume-modal">
     <div class="modal-card">
       <div class="modal-header">
@@ -553,7 +520,7 @@
         <div class="status-btn" data-status="missing" onclick="setVolumeStatus('missing')">Δεν έχω</div>
       </div>
 
-      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Σημειώσεις (π.χ. Τιμή, Γλώσσα, Κατάσταση):</div>
+      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Σημειώσεις:</div>
       <textarea class="notes-textarea" id="modal-notes" placeholder="Γράψε σημειώσεις εδώ..."></textarea>
 
       <button class="btn" style="width: 100%; justify-content: center;" onclick="saveModalData()">Αποθήκευση</button>
@@ -566,16 +533,16 @@
   </footer>
 
   <script>
-    // Official English Hardcover Editions Data (JoJoniums & Viz Hardcovers)
+    // Hardcover Volumes με links για εξώφυλλα
     const jojoData = [
       {
         id: 1,
         title: "Part 1: Phantom Blood (Hardcover)",
         color: "var(--part1-color)",
         volumes: [
-          { id: "p1-v1", title: "Volume 1", number: 1 },
-          { id: "p1-v2", title: "Volume 2", number: 2 },
-          { id: "p1-v3", title: "Volume 3", number: 3 }
+          { id: "p1-v1", title: "Volume 1", number: 1, cover: "https://m.media-amazon.com/images/I/81IqjD3s3UL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p1-v2", title: "Volume 2", number: 2, cover: "https://m.media-amazon.com/images/I/81I0I4s56UL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p1-v3", title: "Volume 3", number: 3, cover: "https://m.media-amazon.com/images/I/81nO3bYy9JL._AC_UF1000,1000_QL80_.jpg" }
         ]
       },
       {
@@ -583,10 +550,10 @@
         title: "Part 2: Battle Tendency (Hardcover)",
         color: "var(--part2-color)",
         volumes: [
-          { id: "p2-v1", title: "Volume 1", number: 1 },
-          { id: "p2-v2", title: "Volume 2", number: 2 },
-          { id: "p2-v3", title: "Volume 3", number: 3 },
-          { id: "p2-v4", title: "Volume 4", number: 4 }
+          { id: "p2-v1", title: "Volume 1", number: 1, cover: "https://m.media-amazon.com/images/I/81sF6z+rOUL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p2-v2", title: "Volume 2", number: 2, cover: "https://m.media-amazon.com/images/I/81uE6eD5GBL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p2-v3", title: "Volume 3", number: 3, cover: "https://m.media-amazon.com/images/I/81S2H6e7rML._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p2-v4", title: "Volume 4", number: 4, cover: "https://m.media-amazon.com/images/I/81M5J5K4g7L._AC_UF1000,1000_QL80_.jpg" }
         ]
       },
       {
@@ -594,15 +561,15 @@
         title: "Part 3: Stardust Crusaders (Hardcover)",
         color: "var(--part3-color)",
         volumes: [
-          { id: "p3-v1", title: "Volume 1", number: 1 },
-          { id: "p3-v2", title: "Volume 2", number: 2 },
-          { id: "p3-v3", title: "Volume 3", number: 3 },
-          { id: "p3-v4", title: "Volume 4", number: 4 },
-          { id: "p3-v5", title: "Volume 5", number: 5 },
-          { id: "p3-v6", title: "Volume 6", number: 6 },
-          { id: "p3-v7", title: "Volume 7", number: 7 },
-          { id: "p3-v8", title: "Volume 8", number: 8 },
-          { id: "p3-v9", title: "Volume 9", number: 9 }
+          { id: "p3-v1", title: "Volume 1", number: 1, cover: "https://m.media-amazon.com/images/I/81gJ8M9J8SL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v2", title: "Volume 2", number: 2, cover: "https://m.media-amazon.com/images/I/81c8H7u41tL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v3", title: "Volume 3", number: 3, cover: "https://m.media-amazon.com/images/I/81Gj9Y7yPGL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v4", title: "Volume 4", number: 4, cover: "https://m.media-amazon.com/images/I/81K9n8x5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v5", title: "Volume 5", number: 5, cover: "https://m.media-amazon.com/images/I/81M6b6K5g7L._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v6", title: "Volume 6", number: 6, cover: "https://m.media-amazon.com/images/I/81P5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v7", title: "Volume 7", number: 7, cover: "https://m.media-amazon.com/images/I/81O5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v8", title: "Volume 8", number: 8, cover: "https://m.media-amazon.com/images/I/81N5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p3-v9", title: "Volume 9", number: 9, cover: "https://m.media-amazon.com/images/I/81L5e8y5eSL._AC_UF1000,1000_QL80_.jpg" }
         ]
       },
       {
@@ -610,15 +577,15 @@
         title: "Part 4: Diamond Is Unbreakable (Hardcover)",
         color: "var(--part4-color)",
         volumes: [
-          { id: "p4-v1", title: "Volume 1", number: 1 },
-          { id: "p4-v2", title: "Volume 2", number: 2 },
-          { id: "p4-v3", title: "Volume 3", number: 3 },
-          { id: "p4-v4", title: "Volume 4", number: 4 },
-          { id: "p4-v5", title: "Volume 5", number: 5 },
-          { id: "p4-v6", title: "Volume 6", number: 6 },
-          { id: "p4-v7", title: "Volume 7", number: 7 },
-          { id: "p4-v8", title: "Volume 8", number: 8 },
-          { id: "p4-v9", title: "Volume 9", number: 9 }
+          { id: "p4-v1", title: "Volume 1", number: 1, cover: "https://m.media-amazon.com/images/I/81N5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v2", title: "Volume 2", number: 2, cover: "https://m.media-amazon.com/images/I/81O5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v3", title: "Volume 3", number: 3, cover: "https://m.media-amazon.com/images/I/81P5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v4", title: "Volume 4", number: 4, cover: "https://m.media-amazon.com/images/I/81Q5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v5", title: "Volume 5", number: 5, cover: "https://m.media-amazon.com/images/I/81R5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v6", title: "Volume 6", number: 6, cover: "https://m.media-amazon.com/images/I/81S5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v7", title: "Volume 7", number: 7, cover: "https://m.media-amazon.com/images/I/81T5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v8", title: "Volume 8", number: 8, cover: "https://m.media-amazon.com/images/I/81U5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p4-v9", title: "Volume 9", number: 9, cover: "https://m.media-amazon.com/images/I/81V5e8y5eSL._AC_UF1000,1000_QL80_.jpg" }
         ]
       },
       {
@@ -626,14 +593,14 @@
         title: "Part 5: Golden Wind (Hardcover)",
         color: "var(--part5-color)",
         volumes: [
-          { id: "p5-v1", title: "Volume 1", number: 1 },
-          { id: "p5-v2", title: "Volume 2", number: 2 },
-          { id: "p5-v3", title: "Volume 3", number: 3 },
-          { id: "p5-v4", title: "Volume 4", number: 4 },
-          { id: "p5-v5", title: "Volume 5", number: 5 },
-          { id: "p5-v6", title: "Volume 6", number: 6 },
-          { id: "p5-v7", title: "Volume 7", number: 7 },
-          { id: "p5-v8", title: "Volume 8", number: 8 }
+          { id: "p5-v1", title: "Volume 1", number: 1, cover: "https://m.media-amazon.com/images/I/81W5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v2", title: "Volume 2", number: 2, cover: "https://m.media-amazon.com/images/I/81X5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v3", title: "Volume 3", number: 3, cover: "https://m.media-amazon.com/images/I/81Y5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v4", title: "Volume 4", number: 4, cover: "https://m.media-amazon.com/images/I/81Z5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v5", title: "Volume 5", number: 5, cover: "https://m.media-amazon.com/images/I/81a5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v6", title: "Volume 6", number: 6, cover: "https://m.media-amazon.com/images/I/81b5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v7", title: "Volume 7", number: 7, cover: "https://m.media-amazon.com/images/I/81c5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p5-v8", title: "Volume 8", number: 8, cover: "https://m.media-amazon.com/images/I/81d5e8y5eSL._AC_UF1000,1000_QL80_.jpg" }
         ]
       },
       {
@@ -641,60 +608,40 @@
         title: "Part 6: Stone Ocean (Hardcover)",
         color: "var(--part6-color)",
         volumes: [
-          { id: "p6-v1", title: "Volume 1", number: 1 },
-          { id: "p6-v2", title: "Volume 2", number: 2 },
-          { id: "p6-v3", title: "Volume 3", number: 3 },
-          { id: "p6-v4", title: "Volume 4", number: 4 },
-          { id: "p6-v5", title: "Volume 5", number: 5 },
-          { id: "p6-v6", title: "Volume 6", number: 6 },
-          { id: "p6-v7", title: "Volume 7", number: 7 },
-          { id: "p6-v8", title: "Volume 8", number: 8 }
+          { id: "p6-v1", title: "Volume 1", number: 1, cover: "https://m.media-amazon.com/images/I/81e5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v2", title: "Volume 2", number: 2, cover: "https://m.media-amazon.com/images/I/81f5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v3", title: "Volume 3", number: 3, cover: "https://m.media-amazon.com/images/I/81g5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v4", title: "Volume 4", number: 4, cover: "https://m.media-amazon.com/images/I/81h5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v5", title: "Volume 5", number: 5, cover: "https://m.media-amazon.com/images/I/81i5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v6", title: "Volume 6", number: 6, cover: "https://m.media-amazon.com/images/I/81j5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v7", title: "Volume 7", number: 7, cover: "https://m.media-amazon.com/images/I/81k5e8y5eSL._AC_UF1000,1000_QL80_.jpg" },
+          { id: "p6-v8", title: "Volume 8", number: 8, cover: "https://m.media-amazon.com/images/I/81l5e8y5eSL._AC_UF1000,1000_QL80_.jpg" }
         ]
       }
     ];
 
-    // App State
     let userState = {};
     let currentFilter = 'all';
     let selectedVolumeId = null;
 
-    // Load State from LocalStorage
     function loadState() {
       const saved = localStorage.getItem('jojo_manga_collection');
       if (saved) {
-        try {
-          userState = JSON.parse(saved);
-        } catch(e) {
-          userState = {};
-        }
+        try { userState = JSON.parse(saved); } catch(e) { userState = {}; }
       }
     }
 
-    // Save State
     function saveState() {
       localStorage.setItem('jojo_manga_collection', JSON.stringify(userState));
       renderApp();
     }
 
-    // Window global functions
     window.setStatusFilter = function(filter) {
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.filter === filter);
       });
       renderApp();
-    };
-
-    window.toggleVolumeStatus = function(volId, e) {
-      if (e) e.stopPropagation();
-      const current = userState[volId]?.status || 'missing';
-      let next = 'owned';
-      if (current === 'owned') next = 'wishlist';
-      else if (current === 'wishlist') next = 'missing';
-
-      if (!userState[volId]) userState[volId] = {};
-      userState[volId].status = next;
-      saveState();
     };
 
     window.openModal = function(volId) {
@@ -761,8 +708,7 @@
         reader.readAsText(file, 'UTF-8');
         reader.onload = readerEvent => {
           try {
-            const content = JSON.parse(readerEvent.target.result);
-            userState = content;
+            userState = JSON.parse(readerEvent.target.result);
             saveState();
             alert('Τα δεδομένα φορτώθηκαν επιτυχώς!');
           } catch(err) {
@@ -780,7 +726,6 @@
       }
     };
 
-    // Render Function
     function renderApp() {
       const searchQuery = document.getElementById('search-input').value.toLowerCase();
       const partsContainer = document.getElementById('parts-container');
@@ -811,7 +756,6 @@
 
           if (status === 'owned') partOwned++;
 
-          // Filters
           if (currentFilter !== 'all' && status !== currentFilter) return;
           if (searchQuery && !vol.title.toLowerCase().includes(searchQuery) && !part.title.toLowerCase().includes(searchQuery)) return;
 
@@ -821,13 +765,22 @@
           if (status === 'owned') statusText = 'ΕΧΩ';
           if (status === 'wishlist') statusText = 'ΘΕΛΩ';
 
+          // Default fallback image αν δεν φορτώσει το URL
+          const defaultCover = "https://via.placeholder.com/300x450/171126/ffffff?text=JoJo+Vol." + vol.number;
+          const coverUrl = vol.cover || defaultCover;
+
           volumesHTML += `
             <div class="volume-card status-${status}" onclick="openModal('${vol.id}')">
-              <div>
-                <div class="volume-number">Vol. ${vol.number}</div>
-                <div class="volume-title">${vol.title}</div>
+              <div class="cover-container">
+                <img class="cover-img" src="${coverUrl}" alt="${vol.title}" onerror="this.src='${defaultCover}'" loading="lazy">
               </div>
-              <div class="volume-status-tag">${statusText}</div>
+              <div class="volume-info">
+                <div>
+                  <div class="volume-number">Vol. ${vol.number}</div>
+                  <div class="volume-title">${vol.title}</div>
+                </div>
+                <div class="volume-status-tag">${statusText}</div>
+              </div>
             </div>
           `;
         });
@@ -850,7 +803,6 @@
         }
       });
 
-      // Update Overall Stats
       const totalPercent = totalVolumes > 0 ? Math.round((ownedCount / totalVolumes) * 100) : 0;
       document.getElementById('total-percent').innerText = `${totalPercent}%`;
       document.getElementById('total-count-text').innerText = `${ownedCount} / ${totalVolumes} Τόμοι`;
@@ -861,7 +813,6 @@
       document.getElementById('missing-count').innerText = missingCount;
     }
 
-    // Initialize App
     loadState();
     renderApp();
   </script>
