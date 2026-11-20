@@ -530,16 +530,20 @@
   </footer>
 
   <script>
-    // Reliable Working Covers (Wikimedia & Fandom CDN)
+    // Proxy helper function to bypass image blocking
+    function getProxyUrl(url) {
+      return "https://wsrv.nl/?url=" + encodeURIComponent(url);
+    }
+
     const jojoData = [
       {
         id: 1,
         title: "Part 1: Phantom Blood (Hardcover)",
         color: "var(--part1-color)",
         volumes: [
-          { id: "p1-v1", title: "Volume 1", number: 1, cover: "https://static.wikia.nocookie.net/jjba/images/7/7b/Jojonium_v01.png" },
-          { id: "p1-v2", title: "Volume 2", number: 2, cover: "https://static.wikia.nocookie.net/jjba/images/4/4b/Jojonium_v02.png" },
-          { id: "p1-v3", title: "Volume 3", number: 3, cover: "https://static.wikia.nocookie.net/jjba/images/8/87/Jojonium_v03.png" }
+          { id: "p1-v1", title: "Volume 1", number: 1, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/7/7b/Jojonium_v01.png") },
+          { id: "p1-v2", title: "Volume 2", number: 2, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/4/4b/Jojonium_v02.png") },
+          { id: "p1-v3", title: "Volume 3", number: 3, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/8/87/Jojonium_v03.png") }
         ]
       },
       {
@@ -547,10 +551,10 @@
         title: "Part 2: Battle Tendency (Hardcover)",
         color: "var(--part2-color)",
         volumes: [
-          { id: "p2-v1", title: "Volume 1", number: 1, cover: "https://static.wikia.nocookie.net/jjba/images/d/df/Jojonium_v04.png" },
-          { id: "p2-v2", title: "Volume 2", number: 2, cover: "https://static.wikia.nocookie.net/jjba/images/2/23/Jojonium_v05.png" },
-          { id: "p2-v3", title: "Volume 3", number: 3, cover: "https://static.wikia.nocookie.net/jjba/images/1/1a/Jojonium_v06.png" },
-          { id: "p2-v4", title: "Volume 4", number: 4, cover: "https://static.wikia.nocookie.net/jjba/images/3/30/Jojonium_v07.png" }
+          { id: "p2-v1", title: "Volume 1", number: 1, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/d/df/Jojonium_v04.png") },
+          { id: "p2-v2", title: "Volume 2", number: 2, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/2/23/Jojonium_v05.png") },
+          { id: "p2-v3", title: "Volume 3", number: 3, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/1/1a/Jojonium_v06.png") },
+          { id: "p2-v4", title: "Volume 4", number: 4, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/3/30/Jojonium_v07.png") }
         ]
       },
       {
@@ -558,15 +562,15 @@
         title: "Part 3: Stardust Crusaders (Hardcover)",
         color: "var(--part3-color)",
         volumes: [
-          { id: "p3-v1", title: "Volume 1", number: 1, cover: "https://static.wikia.nocookie.net/jjba/images/3/3a/Jojonium_v08.png" },
-          { id: "p3-v2", title: "Volume 2", number: 2, cover: "https://static.wikia.nocookie.net/jjba/images/f/f3/Jojonium_v09.png" },
-          { id: "p3-v3", title: "Volume 3", number: 3, cover: "https://static.wikia.nocookie.net/jjba/images/b/b2/Jojonium_v10.png" },
-          { id: "p3-v4", title: "Volume 4", number: 4, cover: "https://static.wikia.nocookie.net/jjba/images/d/dc/Jojonium_v11.png" },
-          { id: "p3-v5", title: "Volume 5", number: 5, cover: "https://static.wikia.nocookie.net/jjba/images/3/39/Jojonium_v12.png" },
-          { id: "p3-v6", title: "Volume 6", number: 6, cover: "https://static.wikia.nocookie.net/jjba/images/5/5f/Jojonium_v13.png" },
-          { id: "p3-v7", title: "Volume 7", number: 7, cover: "https://static.wikia.nocookie.net/jjba/images/e/e0/Jojonium_v14.png" },
-          { id: "p3-v8", title: "Volume 8", number: 8, cover: "https://static.wikia.nocookie.net/jjba/images/c/c5/Jojonium_v15.png" },
-          { id: "p3-v9", title: "Volume 9", number: 9, cover: "https://static.wikia.nocookie.net/jjba/images/b/b0/Jojonium_v16.png" }
+          { id: "p3-v1", title: "Volume 1", number: 1, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/3/3a/Jojonium_v08.png") },
+          { id: "p3-v2", title: "Volume 2", number: 2, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/f/f3/Jojonium_v09.png") },
+          { id: "p3-v3", title: "Volume 3", number: 3, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/b/b2/Jojonium_v10.png") },
+          { id: "p3-v4", title: "Volume 4", number: 4, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/d/dc/Jojonium_v11.png") },
+          { id: "p3-v5", title: "Volume 5", number: 5, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/3/39/Jojonium_v12.png") },
+          { id: "p3-v6", title: "Volume 6", number: 6, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/5/5f/Jojonium_v13.png") },
+          { id: "p3-v7", title: "Volume 7", number: 7, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/e/e0/Jojonium_v14.png") },
+          { id: "p3-v8", title: "Volume 8", number: 8, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/c/c5/Jojonium_v15.png") },
+          { id: "p3-v9", title: "Volume 9", number: 9, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/b/b0/Jojonium_v16.png") }
         ]
       },
       {
@@ -574,15 +578,15 @@
         title: "Part 4: Diamond Is Unbreakable (Hardcover)",
         color: "var(--part4-color)",
         volumes: [
-          { id: "p4-v1", title: "Volume 1", number: 1, cover: "https://static.wikia.nocookie.net/jjba/images/8/82/DU_Volume_1.png" },
-          { id: "p4-v2", title: "Volume 2", number: 2, cover: "https://static.wikia.nocookie.net/jjba/images/6/67/DU_Volume_2.png" },
-          { id: "p4-v3", title: "Volume 3", number: 3, cover: "https://static.wikia.nocookie.net/jjba/images/e/e5/DU_Volume_3.png" },
-          { id: "p4-v4", title: "Volume 4", number: 4, cover: "https://static.wikia.nocookie.net/jjba/images/a/a2/DU_Volume_4.png" },
-          { id: "p4-v5", title: "Volume 5", number: 5, cover: "https://static.wikia.nocookie.net/jjba/images/5/51/DU_Volume_5.png" },
-          { id: "p4-v6", title: "Volume 6", number: 6, cover: "https://static.wikia.nocookie.net/jjba/images/8/87/DU_Volume_6.png" },
-          { id: "p4-v7", title: "Volume 7", number: 7, cover: "https://static.wikia.nocookie.net/jjba/images/4/4b/DU_Volume_7.png" },
-          { id: "p4-v8", title: "Volume 8", number: 8, cover: "https://static.wikia.nocookie.net/jjba/images/1/18/DU_Volume_8.png" },
-          { id: "p4-v9", title: "Volume 9", number: 9, cover: "https://static.wikia.nocookie.net/jjba/images/8/83/DU_Volume_9.png" }
+          { id: "p4-v1", title: "Volume 1", number: 1, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/8/82/DU_Volume_1.png") },
+          { id: "p4-v2", title: "Volume 2", number: 2, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/6/67/DU_Volume_2.png") },
+          { id: "p4-v3", title: "Volume 3", number: 3, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/e/e5/DU_Volume_3.png") },
+          { id: "p4-v4", title: "Volume 4", number: 4, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/a/a2/DU_Volume_4.png") },
+          { id: "p4-v5", title: "Volume 5", number: 5, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/5/51/DU_Volume_5.png") },
+          { id: "p4-v6", title: "Volume 6", number: 6, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/8/87/DU_Volume_6.png") },
+          { id: "p4-v7", title: "Volume 7", number: 7, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/4/4b/DU_Volume_7.png") },
+          { id: "p4-v8", title: "Volume 8", number: 8, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/1/18/DU_Volume_8.png") },
+          { id: "p4-v9", title: "Volume 9", number: 9, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/8/83/DU_Volume_9.png") }
         ]
       },
       {
@@ -590,14 +594,14 @@
         title: "Part 5: Golden Wind (Hardcover)",
         color: "var(--part5-color)",
         volumes: [
-          { id: "p5-v1", title: "Volume 1", number: 1, cover: "https://static.wikia.nocookie.net/jjba/images/7/77/GW_Volume_1.png" },
-          { id: "p5-v2", title: "Volume 2", number: 2, cover: "https://static.wikia.nocookie.net/jjba/images/e/e6/GW_Volume_2.png" },
-          { id: "p5-v3", title: "Volume 3", number: 3, cover: "https://static.wikia.nocookie.net/jjba/images/7/75/GW_Volume_3.png" },
-          { id: "p5-v4", title: "Volume 4", number: 4, cover: "https://static.wikia.nocookie.net/jjba/images/6/6c/GW_Volume_4.png" },
-          { id: "p5-v5", title: "Volume 5", number: 5, cover: "https://static.wikia.nocookie.net/jjba/images/b/b3/GW_Volume_5.png" },
-          { id: "p5-v6", title: "Volume 6", number: 6, cover: "https://static.wikia.nocookie.net/jjba/images/9/91/GW_Volume_6.png" },
-          { id: "p5-v7", title: "Volume 7", number: 7, cover: "https://static.wikia.nocookie.net/jjba/images/7/79/GW_Volume_7.png" },
-          { id: "p5-v8", title: "Volume 8", number: 8, cover: "https://static.wikia.nocookie.net/jjba/images/0/07/GW_Volume_8.png" }
+          { id: "p5-v1", title: "Volume 1", number: 1, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/7/77/GW_Volume_1.png") },
+          { id: "p5-v2", title: "Volume 2", number: 2, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/e/e6/GW_Volume_2.png") },
+          { id: "p5-v3", title: "Volume 3", number: 3, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/7/75/GW_Volume_3.png") },
+          { id: "p5-v4", title: "Volume 4", number: 4, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/6/6c/GW_Volume_4.png") },
+          { id: "p5-v5", title: "Volume 5", number: 5, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/b/b3/GW_Volume_5.png") },
+          { id: "p5-v6", title: "Volume 6", number: 6, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/9/91/GW_Volume_6.png") },
+          { id: "p5-v7", title: "Volume 7", number: 7, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/7/79/GW_Volume_7.png") },
+          { id: "p5-v8", title: "Volume 8", number: 8, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/0/07/GW_Volume_8.png") }
         ]
       },
       {
@@ -605,14 +609,14 @@
         title: "Part 6: Stone Ocean (Hardcover)",
         color: "var(--part6-color)",
         volumes: [
-          { id: "p6-v1", title: "Volume 1", number: 1, cover: "https://static.wikia.nocookie.net/jjba/images/4/4b/SO_Volume_1.png" },
-          { id: "p6-v2", title: "Volume 2", number: 2, cover: "https://static.wikia.nocookie.net/jjba/images/7/7b/SO_Volume_2.png" },
-          { id: "p6-v3", title: "Volume 3", number: 3, cover: "https://static.wikia.nocookie.net/jjba/images/c/c5/SO_Volume_3.png" },
-          { id: "p6-v4", title: "Volume 4", number: 4, cover: "https://static.wikia.nocookie.net/jjba/images/a/a2/SO_Volume_4.png" },
-          { id: "p6-v5", title: "Volume 5", number: 5, cover: "https://static.wikia.nocookie.net/jjba/images/5/56/SO_Volume_5.png" },
-          { id: "p6-v6", title: "Volume 6", number: 6, cover: "https://static.wikia.nocookie.net/jjba/images/7/75/SO_Volume_6.png" },
-          { id: "p6-v7", title: "Volume 7", number: 7, cover: "https://static.wikia.nocookie.net/jjba/images/e/e0/SO_Volume_7.png" },
-          { id: "p6-v8", title: "Volume 8", number: 8, cover: "https://static.wikia.nocookie.net/jjba/images/6/67/SO_Volume_8.png" }
+          { id: "p6-v1", title: "Volume 1", number: 1, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/4/4b/SO_Volume_1.png") },
+          { id: "p6-v2", title: "Volume 2", number: 2, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/7/7b/SO_Volume_2.png") },
+          { id: "p6-v3", title: "Volume 3", number: 3, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/c/c5/SO_Volume_3.png") },
+          { id: "p6-v4", title: "Volume 4", number: 4, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/a/a2/SO_Volume_4.png") },
+          { id: "p6-v5", title: "Volume 5", number: 5, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/5/56/SO_Volume_5.png") },
+          { id: "p6-v6", title: "Volume 6", number: 6, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/7/75/SO_Volume_6.png") },
+          { id: "p6-v7", title: "Volume 7", number: 7, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/e/e0/SO_Volume_7.png") },
+          { id: "p6-v8", title: "Volume 8", number: 8, cover: getProxyUrl("https://static.wikia.nocookie.net/jjba/images/6/67/SO_Volume_8.png") }
         ]
       }
     ];
