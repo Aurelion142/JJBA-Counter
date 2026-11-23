@@ -897,7 +897,12 @@
       document.getElementById('wishlist-count').innerText = wishlistCount;
       document.getElementById('missing-count').innerText = missingCount;
     }
-
+    
+    document.getElementById('volume-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
     loadState();
     renderApp();
   </script>
