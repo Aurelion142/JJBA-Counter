@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JoJo Manga Collector</title>
+  <title>JJBA COUNTER</title>
   
   <!-- PWA & Mobile Meta -->
   <meta name="theme-color" content="#120e24">
@@ -11,10 +11,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="JoJo Tracker">
   
-  <!-- Favicon (για tabs στον browser) -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="./favicon.png">
-  
-  <!-- Apple Touch Icon (για shortcut στην αρχική οθόνη κινητού) -->
   <link rel="apple-touch-icon" href="./favicon.png">
   
   <!-- Google Fonts -->
@@ -37,13 +35,13 @@
       --jojo-green: #22c55e;
       --jojo-red: #ef4444;
       
-      /* Xrōmata Parts */
+      /* Part Colors */
       --part1-color: #10b981;
       --part2-color: #ef4444;
       --part3-color: #3b82f6;
       --part4-color: #a855f7;
       --part5-color: #eab308;
-      --part6-color: #6fdfb0;
+      --part6-color: #ec4899;
       --part7-color: #f58739;
       --kishibe-color: #841cb4;
       --extras-color: #e64cb2;
@@ -97,11 +95,18 @@
       align-items: center;
       gap: 10px;
       font-family: 'Bebas Neue', cursive;
-      font-size: 2rem;
+      font-size: 1.8rem;
       letter-spacing: 2px;
       background: linear-gradient(135deg, #eab308, #ec4899, #9333ea);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .jojo-star-icon {
+      width: 28px;
+      height: 28px;
+      transform: rotate(-15deg);
+      filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.7));
     }
 
     .btn {
@@ -485,7 +490,16 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <i class="fa-solid fa-star"></i> JOJO MANGA TRACKER
+        <svg class="jojo-star-icon" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="star-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#ea580c" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#star-gradient)" d="M50 0 L63 35 L100 38 L72 63 L80 100 L50 79 L20 100 L28 63 L0 38 L37 35 Z" />
+        </svg>
+        JJBA COUNTER
       </div>
       <div style="display: flex; gap: 8px;">
         <button class="btn" onclick="exportData()"><i class="fa-solid fa-download"></i></button>
@@ -697,7 +711,6 @@
           { id: "e-v7", title: "Shining Diamond's Demonic Heartbreak Vol. 1", number: 7, cover: "./covers/e-v7.jpeg" },
           { id: "e-v8", title: "Shining Diamond's Demonic Heartbreak Vol. 2", number: 8, cover: "./covers/e-v8.jpeg" },
           { id: "e-v9", title: "Demonic Heartbreak 3 Pa Vol. 3", number: 9, cover: "./covers/e-v9.jpeg" }
-
         ]
       }
     ];
@@ -906,6 +919,7 @@
         closeModal();
       }
     });
+
     loadState();
     renderApp();
   </script>
