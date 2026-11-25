@@ -50,6 +50,23 @@
       --text-muted: #94a3b8;
     }
 
+    /* Themes */
+    body.theme-part3 {
+      --jojo-purple: #3b82f6;
+      --jojo-pink: #eab308;
+      --card-border: rgba(59, 130, 246, 0.3);
+    }
+    body.theme-part5 {
+      --jojo-purple: #eab308;
+      --jojo-pink: #a855f7;
+      --card-border: rgba(234, 179, 8, 0.3);
+    }
+    body.theme-part6 {
+      --jojo-purple: #ec4899;
+      --jojo-pink: #06b6d4;
+      --card-border: rgba(236, 72, 153, 0.3);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -70,6 +87,32 @@
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       padding-bottom: 50px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Menacing Sound Effect BG Overlay */
+    .menacing-container {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.12;
+      font-family: 'Bebas Neue', cursive;
+      overflow: hidden;
+    }
+
+    .menacing-text {
+      position: absolute;
+      font-size: 5rem;
+      color: var(--jojo-pink);
+      text-shadow: 0 0 10px var(--jojo-purple);
+      animation: floatMenacing 4s infinite ease-in-out alternate;
+    }
+
+    @keyframes floatMenacing {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-15px) scale(1.1); }
     }
 
     header {
@@ -121,12 +164,20 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--jojo-purple);
+      color: #fff;
     }
 
     .container {
       max-width: 1200px;
       margin: 20px auto;
       padding: 0 15px;
+      position: relative;
+      z-index: 2;
     }
 
     .stats-grid {
@@ -200,7 +251,7 @@
 
     .search-box {
       flex: 1;
-      min-width: 250px;
+      min-width: 200px;
       position: relative;
     }
 
@@ -225,9 +276,10 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    .filter-btn {
+    .filter-btn, .theme-select {
       padding: 6px 12px;
       border-radius: 6px;
       border: 1px solid var(--card-border);
@@ -235,6 +287,12 @@
       color: var(--text-muted);
       cursor: pointer;
       font-size: 0.8rem;
+      outline: none;
+    }
+
+    .theme-select option {
+      background: #120e24;
+      color: #fff;
     }
 
     .filter-btn.active {
@@ -425,8 +483,9 @@
       border: 1px solid var(--jojo-purple);
       border-radius: 12px;
       width: 90%;
-      max-width: 400px;
+      max-width: 440px;
       padding: 20px;
+      position: relative;
     }
 
     .modal-header {
@@ -464,9 +523,49 @@
     .status-btn.active[data-status="wishlist"] { background: var(--jojo-gold); color: #000; font-weight: 700; }
     .status-btn.active[data-status="missing"] { background: var(--jojo-red); color: #fff; font-weight: 700; }
 
+    /* Stand Stats Visual Wheel */
+    .stand-stats-container {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .stand-stats-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.1rem;
+      color: var(--jojo-gold);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stats-radar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-rank {
+      font-weight: 800;
+      color: var(--jojo-pink);
+      font-size: 0.9rem;
+    }
+
     .notes-textarea {
       width: 100%;
-      height: 80px;
+      height: 70px;
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--card-border);
       border-radius: 6px;
@@ -482,10 +581,23 @@
       color: var(--text-muted);
       font-size: 0.8rem;
       margin-top: 40px;
+      position: relative;
+      z-index: 2;
     }
   </style>
 </head>
-<body>
+<body class="theme-default">
+
+  <!-- Menacing Sound Effect Background Overlay -->
+  <div class="menacing-container">
+    <div class="menacing-text" style="top: 10%; left: 5%;">ゴ</div>
+    <div class="menacing-text" style="top: 25%; left: 8%;">ゴ</div>
+    <div class="menacing-text" style="top: 40%; left: 3%;">ゴ</div>
+    <div class="menacing-text" style="top: 15%; right: 6%;">ゴ</div>
+    <div class="menacing-text" style="top: 55%; right: 4%;">ゴ</div>
+    <div class="menacing-text" style="top: 75%; left: 7%;">ゴ</div>
+    <div class="menacing-text" style="top: 80%; right: 8%;">ゴ</div>
+  </div>
 
   <header>
     <div class="header-container">
@@ -501,7 +613,10 @@
         </svg>
         JJBA COUNTER
       </div>
-      <div style="display: flex; gap: 8px;">
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="btn" id="sfx-toggle-btn" onclick="toggleSFX()" title="Ήχοι (SFX)">
+          <i class="fa-solid fa-volume-high" id="sfx-icon"></i>
+        </button>
         <button class="btn" onclick="exportData()"><i class="fa-solid fa-download"></i></button>
         <button class="btn" onclick="importData()"><i class="fa-solid fa-upload"></i></button>
       </div>
@@ -543,7 +658,15 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="search-input" placeholder="Αναζήτηση..." oninput="renderApp()">
       </div>
+
       <div class="filter-group">
+        <select class="theme-select" id="theme-selector" onchange="changeTheme(this.value)">
+          <option value="default">🎨 Theme: Default Purple</option>
+          <option value="part3">⭐ Theme: Stardust Blue</option>
+          <option value="part5">🐞 Theme: Golden Wind</option>
+          <option value="part6">🦋 Theme: Stone Ocean</option>
+        </select>
+
         <button class="filter-btn active" data-filter="all" onclick="setStatusFilter('all')">Όλα</button>
         <button class="filter-btn" data-filter="owned" onclick="setStatusFilter('owned')"><i class="fa-solid fa-check"></i> Έχω</button>
         <button class="filter-btn" data-filter="wishlist" onclick="setStatusFilter('wishlist')"><i class="fa-solid fa-star"></i> Επιθυμία</button>
@@ -561,6 +684,19 @@
         <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
       </div>
       
+      <!-- Stand Stats Visual Section -->
+      <div class="stand-stats-container">
+        <div class="stand-stats-title"><i class="fa-solid fa-bolt"></i> STAND / POWER STATS</div>
+        <div class="stats-radar-grid">
+          <div class="stat-box"><span>Power</span><span class="stat-rank" id="st-pow">A</span></div>
+          <div class="stat-box"><span>Speed</span><span class="stat-rank" id="st-spd">B</span></div>
+          <div class="stat-box"><span>Range</span><span class="stat-rank" id="st-rng">C</span></div>
+          <div class="stat-box"><span>Durability</span><span class="stat-rank" id="st-dur">A</span></div>
+          <div class="stat-box"><span>Precision</span><span class="stat-rank" id="st-prc">B</span></div>
+          <div class="stat-box"><span>Potential</span><span class="stat-rank" id="st-pot">C</span></div>
+        </div>
+      </div>
+
       <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Κατάσταση:</div>
       <div class="status-options">
         <div class="status-btn" data-status="owned" onclick="setVolumeStatus('owned')">Έχω</div>
@@ -718,6 +854,66 @@
     let userState = {};
     let currentFilter = 'all';
     let selectedVolumeId = null;
+    let sfxEnabled = true;
+
+    // Web Audio Synthesizer (JoJo Sound Effects)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playSFX(type) {
+      if (!sfxEnabled) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+      } else if (type === 'save') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.08);
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.16);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      }
+    }
+
+    function toggleSFX() {
+      sfxEnabled = !sfxEnabled;
+      const icon = document.getElementById('sfx-icon');
+      icon.className = sfxEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+      if (sfxEnabled) playSFX('click');
+    }
+
+    function changeTheme(themeName) {
+      document.body.className = `theme-${themeName}`;
+      localStorage.setItem('jojo_theme', themeName);
+      playSFX('click');
+    }
+
+    function getRandomRank() {
+      const ranks = ['A', 'B', 'C', 'D', 'E', '∞'];
+      return ranks[Math.floor(Math.random() * ranks.length)];
+    }
+
+    function updateStandStats() {
+      document.getElementById('st-pow').innerText = getRandomRank();
+      document.getElementById('st-spd').innerText = getRandomRank();
+      document.getElementById('st-rng').innerText = getRandomRank();
+      document.getElementById('st-dur').innerText = getRandomRank();
+      document.getElementById('st-prc').innerText = getRandomRank();
+      document.getElementById('st-pot').innerText = getRandomRank();
+    }
 
     function handleImageError(imgElement, partTitle, volNumber) {
       const container = imgElement.parentElement;
@@ -734,6 +930,9 @@
       if (saved) {
         try { userState = JSON.parse(saved); } catch(e) { userState = {}; }
       }
+      const savedTheme = localStorage.getItem('jojo_theme') || 'default';
+      document.body.className = `theme-${savedTheme}`;
+      document.getElementById('theme-selector').value = savedTheme;
     }
 
     function saveState() {
@@ -746,6 +945,7 @@
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.filter === filter);
       });
+      playSFX('click');
       renderApp();
     };
 
@@ -768,6 +968,8 @@
       });
 
       document.getElementById('modal-notes').value = notes;
+      updateStandStats();
+      playSFX('click');
       document.getElementById('volume-modal').classList.add('active');
     };
 
@@ -780,6 +982,7 @@
       document.querySelectorAll('.status-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.status === status);
       });
+      playSFX('click');
     };
 
     window.saveModalData = function() {
@@ -789,6 +992,7 @@
       const notes = document.getElementById('modal-notes').value;
 
       userState[selectedVolumeId] = { status, notes };
+      playSFX('save');
       saveState();
       closeModal();
     };
